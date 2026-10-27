@@ -38,12 +38,24 @@ Implementado e validado (ver detalhes e contrastes medidos em `docs/DESIGN-SYSTE
 
 Arquivos funcionais afetados: `app/globals.css`, `app/layout.tsx`.
 
-**Próxima entrega técnica prevista: Entrega B — Header + Hero institucional (ainda não iniciada).**
+**Entrega B executada e VERIFIED — ver Fase 5.**
 
-## Fase 5 — Composição da landing com componentes existentes
+## Fase 5 — Composição da landing com componentes existentes (parcialmente executada)
 
 - Montar a página com o mapeamento do `docs/COMPONENT-CATALOG.md` (header, hero, áreas de atuação, sobre, atendimento, conteúdo informativo, FAQ*, contato, footer) — *FAQ não possui componente ainda.
 - Dados da cliente nas páginas/arquivos de configuração do projeto; componentes genéricos permanecem genéricos.
+
+### Entrega B — Header + Hero institucional — implementação funcional VERIFIED (2026-10-27)
+
+- `HeaderBasic` migrado para contrato data-driven (`brand`/`links`/`action?`), consumido pelo layout público via `lib/site-config.ts`; `MobileNav` e navegação por teclado preservados.
+- `HeroPrimary` migrado para contrato data-driven (`title` obrigatório; `eyebrow?`/`description?`/`actions?`/`image?`), com suporte a `next/image` e fallback neutro sem imagem; Server Component preservado.
+- Configuração central da cliente criada em `lib/site-config.ts` (PROJECT_ONLY); conteúdo da hero provisório (`PENDENTE_CONFIRMACAO_CLIENTE`).
+- Home institucional inicial: apenas a hero da cliente; seções genéricas de demo deixaram de ser renderizadas na home (componentes seguem no catálogo); `FooterCta` saiu da composição pública; rodapé mínimo institucional.
+- Demos da `/library` preservadas, adaptadas para receber props com dados genéricos.
+- Gates: lint 0/0 · build PASS (16 rotas) · Playwright 28 passed + 2 skipped (15 casos × 2 projetos) · zero overflow em 375×667 e 1280×720.
+- A landing inteira ainda **não** está pronta — demais seções da fase seguem pendentes.
+
+**Próxima entrega funcional sugerida: Entrega C — Áreas de atuação + Sobre a advogada (não iniciada).**
 
 ## Fase 6 — Criação de componentes realmente necessários
 

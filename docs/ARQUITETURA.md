@@ -4,9 +4,10 @@ Arquitetura real atual do repositório. Este projeto é independente e foi criad
 
 ## Legenda de estado
 
-- **Implementado (código real):** tudo que este documento descreve — App Router, route group `(site)`, `/library`, componentes, Playwright. É código **herdado do template, ainda não personalizado** para a cliente.
-- **Herdado do template:** `/library`, blog com conteúdo de demonstração, tokens roxos/Geist, tema dark por padrão, metadata genérica.
-- **Planejado (não implementado):** composição da landing com conteúdo da cliente, identidade visual proposta, arquivos de configuração próprios. Ver `docs/ROADMAP-LANDING.md`.
+- **Implementado (código real):** tudo que este documento descreve — App Router, route group `(site)`, `/library`, componentes, Playwright.
+- **Personalizado para a cliente (já aplicado):** identidade visual nos tokens `:root` (Entrega A — tema claro padrão, Inter/Playfair, metadata institucional) e a composição inicial da home pública — `HeaderBasic` + `HeroPrimary` data-driven alimentados por `lib/site-config.ts` (Entrega B). Conteúdo da hero ainda **provisório** (`PENDENTE_CONFIRMACAO_CLIENTE`).
+- **Herdado do template:** `/library`, blog com conteúdo de demonstração, componentes genéricos (contratos data-driven quando migrados; conteúdo hardcoded nas variantes não migradas).
+- **Planejado (não implementado):** demais seções da landing com conteúdo da cliente (áreas de atuação, sobre, atendimento, FAQ, contato, footer definitivo). Ver `docs/ROADMAP-LANDING.md`.
 
 Não tratar funcionalidades planejadas como prontas.
 
@@ -40,8 +41,8 @@ public/
 - `app/globals.css` — import do Tailwind + `tw-animate-css`, `@theme inline`, tokens light/dark.
 - `app/page.tsx` — página inicial.
 - `app/(site)/` — **route group** de rotas do site (parênteses = sem segmento de URL):
-  - `layout.tsx` — layout do site (header + main + footer).
-  - `page.tsx` — home com seções empilhadas.
+  - `layout.tsx` — layout do site: `HeaderBasic` consumindo `siteBrand`/`siteNavLinks` de `lib/site-config.ts`, main e rodapé mínimo institucional (sem contatos/OAB inventados; `FooterCta` não é mais renderizado aqui).
+  - `page.tsx` — home institucional: `HeroPrimary` consumindo `siteHero` de `lib/site-config.ts` (composição mínima da Entrega B; demais seções em entregas futuras).
   - `blog/page.tsx` — listagem de posts.
   - `blog/[slug]/page.tsx` — rota dinâmica de post (hoje vazia — ver problema conhecido).
 - `app/library/` — showcase oficial (ver DEC-001):
@@ -51,16 +52,38 @@ public/
 
 ## `components/`
 
-- `components/ui/` — **4** componentes base shadcn/ui (`button`, `card`, `input`, `textarea`).
-- `components/site/` — **6** componentes de site:
-  - `headers/` (3), `footers/` (3).
-- `components/sections/` — **21** seções (7 grupos × 3):
-  - `hero/`, `about/`, `services/`, `testimonials/`, `pricing/`, `contact/`, `cta/`.
+- `components/ui/` — **6** componentes base shadcn/ui/primitives (`button`, `card`, `input`, `textarea`, `badge`, `avatar`).
+- `components/site/` — **7** componentes de site:
+  - `headers/` (4, incl. `mobile-nav`), `footers/` (3).
+- `components/sections/` — **26** seções:
+  - `hero/` (4), `about/` (3), `services/` (3), `testimonials/` (4), `pricing/` (3), `contact/` (3), `cta/` (4), `logos/` (1), `stats/` (1).
   - `library-shell.tsx` — wrapper de navegação do `/library`.
+- Inventário completo: `docs/COMPONENT-CATALOG.md`.
 
 ## `lib/`
 
 - `lib/utils.ts` — `cn()` (clsx + tailwind-merge), utilitário padrão shadcn/ui.
+- `lib/blog.ts` — fonte compartilhada de posts do blog (listagem + rota dinâmica).
+- `lib/site-config.ts` — **dados específicos do projeto (PROJECT_ONLY)**: marca, navegação e conteúdo provisório da hero da cliente. É configuração, não componente React — não entra na contagem do catálogo.
+
+## Fluxo de dados do projeto (Entrega B)
+
+```
+lib/site-config.ts
+       |
+       +----> layout público ((site)/layout.tsx)
+       |        |
+       |        +----> HeaderBasic
+       |
+       +----> home ((site)/page.tsx)
+                |
+                +----> HeroPrimary
+```
+
+- Componentes genéricos (`HeaderBasic`, `HeroPrimary`) recebem tudo por props (contratos data-driven) — nenhum dado da cliente embutido neles.
+- Separação: conteúdo da cliente em `lib/site-config.ts` (e nas páginas consumidoras); apresentação reutilizável em `components/`.
+- A `/library` mantém demos próprias com dados genéricos — não consome `site-config`.
+- Sem CMS, backend, banco ou APIs; não existe sistema de sincronização com o UI Lab.
 
 ## `public/`
 
@@ -88,7 +111,7 @@ public/
 
 - **Playwright** (`@playwright/test` 1.64.1, devDependency) — infraestrutura e2e/smoke mínima (DEC-006, implementada 2026-10-14).
 - `playwright.config.ts` — `testDir: ./tests`, `baseURL: http://localhost:3000`, `webServer` iniciando `npm run dev`.
-- `tests/smoke.spec.ts` — 8 smoke tests: `/`, `/blog` (listagem, post válido, slug inexistente/404), `/library` (redirect, headers, footers) e navegação home → blog.
+- `tests/smoke.spec.ts` — **15 smoke tests**: `/`, `/blog` (listagem, post válido, slug inexistente/404), `/library` (redirect, headers, footers), navegação home → blog, home institucional (Entrega B), mobile nav, review cards/Avatar e hero data-driven. Contagem confirmada: 15 casos × 2 projetos = 30 execuções.
 - **Projects:** desktop (1280×720) e mobile (375×667), **Chromium** somente.
 - **Execução:** `npm run test:e2e`.
 - Visual regression: ainda não configurada (posterior).

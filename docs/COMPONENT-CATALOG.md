@@ -10,6 +10,8 @@
 - **2** wrappers/shells
 - **Total: 41** componentes reutilizáveis relevantes
 
+> `lib/site-config.ts` é configuração do projeto (PROJECT_ONLY), não componente React — não entra na contagem.
+
 ---
 
 ## UI components — `components/ui/` (6)
@@ -29,7 +31,7 @@
 
 | Nome | Path | Tipo | Status | Reutilização | Observações |
 |---|---|---|---|---|---|
-| HeaderBasic | `components/site/headers/header-basic.tsx` | Header | Template | Média | Logo/textos hardcoded; nav com hash anchors; **Evolução 007:** `MobileNav` no grupo direito (após o CTA) |
+| HeaderBasic | `components/site/headers/header-basic.tsx` | Header | Pronto | Média | **Data-driven (Entrega B, 2026-10-27).** Contrato `HeaderNavItem`/`HeaderBasicProps`: `brand` (`name`, `subtitle?`, `href?` — marca tipográfica, logo oficial pendente), `links` obrigatório, `action?` opcional (CTA ausente → sem botão falso). Links internos via `next/link`, protocolos/externos via `<a>`; estado ativo por `usePathname`; `MobileNav` compartilhado (Evolução 007) e navegação por teclado preservados; consumido pelo layout público via `lib/site-config.ts`; demo na `/library/headers` adaptada para receber props (dados genéricos) |
 | HeaderCentered | `components/site/headers/header-centered.tsx` | Header | Template | Média | Logo/textos hardcoded; centralizado; sem MobileNav — decisão Evolução 007 (flex-wrap funciona em mobile) |
 | HeaderWithTopbar | `components/site/headers/header-with-topbar.tsx` | Header | Template | Média | Topbar com telefone/email; logo/textos hardcoded; **Evolução 007:** `MobileNav` na linha principal |
 | MobileNav | `components/site/headers/mobile-nav.tsx` | Componente interativo compartilhado (Client) | Pronto | Alta | **Evolução 007.** Contrato `MobileNavLink`/`MobileNavProps` (somente `links`); `Button` ghost/icon-lg (Menu/X) com `aria-label` dinâmico, `aria-expanded`, `aria-controls` via `useId`; painel condicional `<nav aria-label="Navegação principal">` com `ul[role=list]`; fecha por botão/Escape (devolve foco)/clique fora; sem Sheet/portal/focus trap; visível só abaixo de `md`; usado por HeaderBasic e HeaderWithTopbar |
@@ -49,7 +51,7 @@
 | Nome | Path | Status | Observações |
 |---|---|---|---|
 | HeroCenterCta | `components/sections/hero/hero-center-cta.tsx` | Pronto | **Data-driven** (Evolução 010, migração — visual preservado). Contrato `HeroCenterAction`/`HeroCenterCtaProps` (tipos locais); `title` obrigatório; `description?`/`supportingText?`/`actions?`; uso típico de 1–2 actions (ausente/vazio → sem bloco de CTA); `Button asChild` — internos via `next/link`, protocolos/externos via `<a>`; sem eyebrow; sem `className` público; Server Component; demo na `/library/hero` (consumer) |
-| HeroPrimary | `components/sections/hero/hero-primary.tsx` | Template | Layout principal |
+| HeroPrimary | `components/sections/hero/hero-primary.tsx` | Pronto | **Data-driven (Entrega B, 2026-10-27).** Contrato `HeroPrimaryAction`/`HeroPrimaryProps`: `title` obrigatório; `eyebrow?`, `description?`, `actions?`, `image?` (`{ src, alt }`) opcionais. Com imagem: `next/image` (`fill`, `sizes` responsivo, `alt` pelo contrato); sem imagem: fallback visual neutro (sem asset falso); actions ausentes/vazias → sem bloco; links internos via `next/link`, protocolos/externos via `<a>`; Server Component; consumido pela home via `lib/site-config.ts`; demo na `/library/hero` adaptada para receber props (dados genéricos) |
 | HeroSteps | `components/sections/hero/hero-steps.tsx` | Template | Hero com passos |
 | HeroMediaShowcase | `components/sections/hero/hero-media-showcase.tsx` | Pronto | **Data-driven** (Evolução 003). Composição vertical/showcase: conteúdo editorial centralizado no topo + media frame dominante full-width (mock HTML/Tailwind, sem imagem) + `figcaption` opcional; Server Component; sem motion; demo na `/library/hero` |
 

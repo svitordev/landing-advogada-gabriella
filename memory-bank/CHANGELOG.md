@@ -4,6 +4,21 @@ Registro de mudanças importantes ao longo da evolução. Formato inspirado em K
 
 ---
 
+## [2026-10-27] — Entrega B: Header + Hero institucional (VERIFIED)
+
+- `HeaderBasic` migrado para contrato data-driven (`brand`/`links`/`action?`): marca tipográfica da cliente via props (logo oficial pendente), CTA condicional (CTA ausente → sem botão falso), links internos/externos conforme contrato, `MobileNav` e navegação por teclado preservados.
+- `HeroPrimary` migrado para contrato data-driven (`title` obrigatório; `eyebrow?`/`description?`/`actions?`/`image?`): suporte a `next/image` com `alt` e `sizes` responsivo; ausência de imagem → fallback visual neutro; Server Component preservado.
+- Criado `lib/site-config.ts` (PROJECT_ONLY — configuração, não componente React): marca, subtítulo, navegação e conteúdo provisório da hero (`PENDENTE_CONFIRMACAO_CLIENTE`).
+- Integração da marca no layout público: `app/(site)/layout.tsx` consome `siteBrand`/`siteNavLinks`; `FooterCta` genérico deixou de ser renderizado publicamente (componente preservado); rodapé mínimo institucional.
+- Home institucional inicial: `app/(site)/page.tsx` renderiza apenas a `HeroPrimary` da cliente; seções genéricas de demonstração não são mais renderizadas na home (componentes permanecem no repositório/catálogo).
+- Demos da `/library` preservadas, adaptadas para fornecer props com dados genéricos.
+- Testes: 1 ajuste legítimo (navegação home → blog abre o menu mobile no project mobile) + 1 teste novo da home institucional. Suíte: 15 casos × 2 projetos = 30 execuções — **28 passed + 2 skipped**.
+- Responsividade validada em 375×667 e 1280×720 (zero overflow em `/`, `/library/headers`, `/library/hero`).
+- Gates: lint **0/0** · build **PASS** (16 rotas) · `git diff --check` limpo.
+- **Nenhuma dependência nova; nenhum asset criado** (logo/fotografia seguem `PENDENTE_CONFIRMACAO_CLIENTE`).
+
+---
+
 ## [2026-10-27] — Design Foundation institucional (VERIFIED)
 
 - **Tema claro como padrão:** classe `dark` fixa removida do root layout; bloco `.dark` de `globals.css` preservado (não adaptado à nova identidade); sem toggle/theme provider.

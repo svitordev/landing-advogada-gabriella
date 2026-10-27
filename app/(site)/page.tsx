@@ -1,24 +1,11 @@
 // app/(site)/page.tsx
-import { AboutSplit } from "@/components/sections/about/about-split";
-import { ContactSplit } from "@/components/sections/contact/contact-split";
-import { CtaSimple } from "@/components/sections/cta/cta-simple";
-import { HeroSteps } from "@/components/sections/hero/hero-steps";
-import { PricingThreeTiers } from "@/components/sections/pricing/pricing-three-tiers";
-import { ServicesWithIcons } from "@/components/sections/services/services-with-icons";
-import { TestimonialsGrid } from "@/components/sections/testimonials/testimonials-grid";
+import { HeroPrimary } from "@/components/sections/hero/hero-primary";
+import { siteHero } from "@/lib/site-config";
 
+// Composição mínima da entrega atual: apenas a Hero institucional com dados da
+// configuração do projeto. As demais seções (áreas de atuação, sobre, atendimento,
+// FAQ, contato) serão compostas nas próximas entregas — os componentes reutilizáveis
+// do template permanecem no repositório, sem conteúdo fictício da cliente no ar.
 export default function SiteHomePage() {
-  return (
-    <>
-      <HeroSteps />
-      <ServicesWithIcons />
-      <AboutSplit/>
-      <TestimonialsGrid/>
-      <PricingThreeTiers/>
-      <ContactSplit/>
-      <CtaSimple/>
-
-      {/* depois você adiciona outras sections: sobre, depoimentos, contato etc. */}
-    </>
-  );
+  return <HeroPrimary {...siteHero} />;
 }

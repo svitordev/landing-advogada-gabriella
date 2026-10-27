@@ -6,18 +6,21 @@ Snapshot curto do estado atual do repositório. Não copiar toda a documentaçã
 
 Projeto **independente** (landing page institucional da advogada Maria Gabriella), criado a partir do código do Svitordev UI Lab.
 
-- **Fase atual:** bootstrap documental concluído + **Design Foundation funcionalmente VERIFIED** (2026-10-27). Landing ainda em composição — Header/Hero da cliente pendentes.
+- **Fase atual:** bootstrap documental concluído + Design Foundation VERIFIED + **Entrega B (Header + Hero institucional) funcionalmente VERIFIED** (2026-10-27). Landing ainda em composição — demais seções pendentes.
+- **Header institucional na home:** `HeaderBasic` data-driven consumindo `lib/site-config.ts`. **Hero institucional na home:** `HeroPrimary` data-driven — conteúdo provisório (`PENDENTE_CONFIRMACAO_CLIENTE`).
+- **Configuração da cliente:** centralizada em `lib/site-config.ts` (PROJECT_ONLY — configuração, não componente React).
+- **Sem logo oficial** (marca tipográfica) e **sem fotografia oficial** (hero usa fallback neutro). **Sem contatos oficiais confirmados** — CTA de contato omitido.
+- **A rota `/blog` ainda contém artigos genéricos herdados do template e está acessível pela navegação pública "Conteúdo"** — pendência antes do deploy (substituir ou retirar antes da publicação).
 - **Tema claro aplicado** como padrão (classe `dark` removida do root; bloco `.dark` preservado, não adaptado; sem toggle).
 - **Identidade vinho/bege aplicada** nos tokens `:root` de `app/globals.css` (OKLCH calibrado; `--input` escurecido p/ ≈3.04:1).
 - **Fontes configuradas:** Inter (400/500/600, corpo) + Playfair Display (500/600, títulos h1–h3) via `next/font/google`, `display: swap`.
 - **Metadata institucional** aplicada no root layout.
-- **Header específico da cliente:** pendente. **Hero específica da cliente:** pendente.
-- **Assets oficiais:** pendentes (logotipo/monograma, fotografia — `PENDENTE_CONFIRMACAO_CLIENTE`).
-- **Dados profissionais:** pendentes de confirmação.
+- **Assets oficiais:** pendentes (logotipo/monograma, fotografia — `PENDENTE_CONFIRMACAO_CLIENTE`). O fluxo de imagem do `HeroPrimary` com arquivo real não foi validado por ausência do asset.
+- **Dados profissionais:** pendentes de confirmação (incl. inscrição OAB).
 - **Site ainda não pronto para publicação.**
-- **Roadmap ativo:** `docs/ROADMAP-LANDING.md` (fase 4 ✅; fases 2/3 seguem pendentes). O roadmap das 1000 evoluções é histórico (origem UI Lab).
-- **Gates da Entrega A:** lint 0/0 · build PASS (16 rotas) · Playwright 26 passed + 2 skipped · verificação visual 375×667 e 1280×720 em `/`, `/library/headers`, `/library/hero`, `/blog` — zero overflow.
-- **Próximo passo:** **Entrega B — Header + Hero** (plano aprovado em sessão própria; não iniciada).
+- **Roadmap ativo:** `docs/ROADMAP-LANDING.md` (fases 1 e 4 ✅; fase 5 parcialmente executada — Entrega B VERIFIED; fases 2/3 seguem pendentes). O roadmap das 1000 evoluções é histórico (origem UI Lab).
+- **Gates da Entrega B:** lint 0/0 · build PASS (16 rotas) · Playwright 28 passed + 2 skipped (15 casos × 2 projetos) · verificação visual 375×667 e 1280×720 em `/`, `/library/headers`, `/library/hero` — zero overflow.
+- **Próximo passo:** **Entrega C — Áreas de atuação + Sobre a advogada** (sugerida; não iniciada).
 
 ### Estado herdado do UI Lab (histórico — descreve o código, ainda válido como estado técnico)
 
@@ -76,7 +79,7 @@ Showcase oficial. Estrutura `app/library/[categoria]/page.tsx` renderiza cada va
 
 Production build **verde** (PASS). Lint atual: **0 errors / 0 warnings**. Rota `/blog/[slug]` funcional.
 
-- **Playwright mínimo:** ✅ **VERIFIED** — `@playwright/test` 1.64.1, **Chromium** somente; projects desktop **1280×720** e mobile **375×667**; **14 smoke tests / 28 execuções** (26 passed + 2 skips intencionais — testes mobile-only da Evolução 007 pulam o project desktop). Execução da DEC-006.
+- **Playwright mínimo:** ✅ **VERIFIED** — `@playwright/test` 1.64.1, **Chromium** somente; projects desktop **1280×720** e mobile **375×667**; **15 smoke tests / 30 execuções** (28 passed + 2 skips intencionais — testes mobile-only da Evolução 007 pulam o project desktop). Contagem confirmada por `npx playwright test --list` em 2026-10-27. Execução da DEC-006.
 - **QLT-001:** ✅ VERIFIED. **QLT-006:** ✅ VERIFIED (Evolução 007). **QLT-007:** ✅ VERIFIED (Evolução 006). **QLT-012:** ✅ VERIFIED.
 - **`/library`:** READY.
 - **Design System:** READY.

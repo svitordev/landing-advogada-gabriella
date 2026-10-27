@@ -1,6 +1,6 @@
 // app/library/headers/page.tsx
 import type { Metadata } from "next";
-import { HeaderBasic } from "@/components/site/headers/header-basic";
+import { HeaderBasic, type HeaderBasicProps } from "@/components/site/headers/header-basic";
 import { HeaderCentered } from "@/components/site/headers/header-centered";
 import { HeaderWithTopbar } from "@/components/site/headers/header-with-topbar";
 
@@ -16,13 +16,29 @@ type HeaderItem = {
   Component: React.ComponentType;
 };
 
+// Demo genérica da variante data-driven — mesmos dados do baseline visual.
+const headerBasicDemo: HeaderBasicProps = {
+  brand: { name: "Sua", subtitle: "Empresa" },
+  links: [
+    { href: "/", label: "Início" },
+    { href: "/#services", label: "Serviços" },
+    { href: "/#about", label: "Sobre" },
+    { href: "/#contact", label: "Contato" },
+  ],
+  action: { label: "Entrar em contato", href: "mailto:contato@suaempresa.com" },
+};
+
+function HeaderBasicDemo() {
+  return <HeaderBasic {...headerBasicDemo} />;
+}
+
 const headers: HeaderItem[] = [
   {
     id: "header-basic",
     name: "Header básico",
     description:
       "Logo à esquerda, navegação à direita e um botão de contato. Funciona bem para a maioria dos sites institucionais.",
-    Component: HeaderBasic,
+    Component: HeaderBasicDemo,
   },
   {
     id: "header-centered",

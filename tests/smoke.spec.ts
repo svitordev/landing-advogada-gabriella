@@ -58,12 +58,40 @@ test('library footers exibe a categoria com previews', async ({ page }) => {
   await expect(page.getByRole('heading', { level: 2 }).first()).toBeVisible();
 });
 
-test('navegacao home -> blog pelo header', async ({ page }) => {
+test('navegacao home -> blog pelo header', async ({ page }, testInfo) => {
   await page.goto('/');
 
-  await page.getByRole('banner').getByRole('link', { name: 'Blog', exact: true }).click();
+  const banner = page.getByRole('banner');
+  if (testInfo.project.name === 'mobile') {
+    await banner.getByRole('button', { name: 'Abrir menu' }).click();
+  }
+
+  await banner.getByRole('link', { name: 'Conteúdo', exact: true }).click();
 
   await expect(page).toHaveURL(/\/blog$/);
+});
+
+test('home exibe marca institucional, H1 da hero e apenas links com destino real', async ({ page }, testInfo) => {
+  await page.goto('/');
+
+  const banner = page.getByRole('banner');
+  await expect(banner.getByRole('link', { name: /Maria Gabriella/ })).toBeVisible();
+  await expect(
+    page.getByRole('heading', {
+      level: 1,
+      name: 'Advocacia personalizada, com atenção a cada detalhe.',
+    }),
+  ).toBeVisible();
+
+  if (testInfo.project.name === 'mobile') {
+    await banner.getByRole('button', { name: 'Abrir menu' }).click();
+  }
+
+  await expect(banner.getByRole('link', { name: 'Início' })).toHaveAttribute('href', '/');
+  await expect(banner.getByRole('link', { name: 'Conteúdo' })).toHaveAttribute('href', '/blog');
+
+  // CTA de contato ainda sem destino oficial — nenhum botão de contato deve ser renderizado
+  await expect(banner.getByRole('button', { name: 'Entrar em contato' })).toHaveCount(0);
 });
 
 test('menu mobile do header basico abre pelo teclado e fecha com Escape devolvendo o foco', async ({ page }, testInfo) => {

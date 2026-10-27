@@ -1,5 +1,8 @@
 // app/sections/hero/page.tsx
-import { HeroPrimary } from "@/components/sections/hero/hero-primary";
+import {
+  HeroPrimary,
+  type HeroPrimaryProps,
+} from "@/components/sections/hero/hero-primary";
 import {
   HeroCenterCta,
   type HeroCenterCtaProps,
@@ -9,6 +12,18 @@ import {
   HeroMediaShowcase,
   type HeroMediaShowcaseProps,
 } from "@/components/sections/hero/hero-media-showcase";
+
+// Demo genérica da variante data-driven — mesma copy do baseline visual.
+const heroPrimaryDemo: HeroPrimaryProps = {
+  eyebrow: "Site institucional · Empresas e profissionais",
+  title: "Apresente sua empresa com clareza, profissionalismo e confiança.",
+  description:
+    "Uma página inicial pensada para explicar quem você é, em que atua e como pode ajudar seus clientes, com destaque para seus principais serviços e formas de contato.",
+  actions: [
+    { label: "Ver serviços", href: "/library/services", variant: "default" },
+    { label: "Falar com a equipe", href: "mailto:contato@suaempresa.com", variant: "outline" },
+  ],
+};
 
 const heroCenterCtaDemo: HeroCenterCtaProps = {
   title: "Apresentamos sua empresa de forma clara, profissional e confiável.",
@@ -78,7 +93,7 @@ export default function HeroSectionsPage() {
               Variante 01 · Split layout (texto + preview)
             </p>
             <div className="overflow-hidden rounded-2xl border bg-background shadow-sm">
-              <HeroPrimary />
+              <HeroPrimary {...heroPrimaryDemo} />
             </div>
           </div>
         </section>

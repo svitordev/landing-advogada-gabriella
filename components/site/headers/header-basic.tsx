@@ -7,23 +7,39 @@ import { Button } from "@/components/ui/button";
 import { MobileNav } from "@/components/site/headers/mobile-nav";
 import { cn } from "@/lib/utils";
 
-const navLinks = [
-  { href: "/", label: "Início" },
-  { href: "/#services", label: "Serviços" },
-  { href: "/#about", label: "Sobre" },
-  { href: "/#contact", label: "Contato" },
-];
+export type HeaderNavItem = {
+  label: string;
+  href: string;
+};
 
-export function HeaderBasic() {
+export type HeaderBasicProps = {
+  brand: {
+    name: string;
+    subtitle?: string;
+    href?: string;
+  };
+  links: HeaderNavItem[];
+  action?: {
+    label: string;
+    href: string;
+  };
+};
+
+function isInternalHref(href: string) {
+  return href.startsWith("/");
+}
+
+export function HeaderBasic({ brand, links, action }: HeaderBasicProps) {
   const pathname = usePathname();
+  const brandHref = brand.href ?? "/";
 
   return (
     <header className="border-b bg-background/80 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
-        {/* Logo / Marca */}
-        <Link href="/" className="text-sm font-semibold tracking-tight">
-          <span className="font-bold">Sua</span>
-          <span className="text-muted-foreground">Empresa</span>
+        {/* Logo / Marca — representação tipográfica (logotipo oficial pendente) */}
+        <Link href={brandHref} className="text-sm font-semibold tracking-tight">
+          <span className="font-bold">{brand.name}</span>
+          {brand.subtitle && <span className="text-muted-foreground"> {brand.subtitle}</span>}
         </Link>
 
         {/* Navegação */}
@@ -31,7 +47,7 @@ export function HeaderBasic() {
           aria-label="Navegação principal"
           className="hidden items-center gap-4 text-xs font-medium text-muted-foreground md:flex"
         >
-          {navLinks.map((item) => {
+          {links.map((item) => {
             const baseHref = item.href.split("#")[0] || "/";
             const isActive = baseHref === "/" ? pathname === "/" : pathname === baseHref;
 
@@ -52,10 +68,16 @@ export function HeaderBasic() {
 
         {/* CTA + Menu mobile */}
         <div className="flex items-center gap-2">
-          <Button size="sm">
-            Entrar em contato
-          </Button>
-          <MobileNav links={navLinks} />
+          {action && (
+            <Button size="sm" asChild>
+              {isInternalHref(action.href) ? (
+                <Link href={action.href}>{action.label}</Link>
+              ) : (
+                <a href={action.href}>{action.label}</a>
+              )}
+            </Button>
+          )}
+          <MobileNav links={links} />
         </div>
       </div>
     </header>
