@@ -1,5 +1,7 @@
 # Svitordev UI Lab — Roadmap de 1000 Evoluções
 
+> **Nota de origem (2026-10-27):** este roadmap é do **Svitordev UI Lab** (origem deste código) e **não** é o roadmap ativo deste repositório. Preservado como referência histórica; propõe-se arquivamento futuro mediante aprovação. Roadmap ativo deste projeto: `docs/ROADMAP-LANDING.md`.
+
 Fonte de verdade do roadmap evolutivo do laboratório. Documento aprovado e versionado em 2026-10-15.
 
 ## Propósito

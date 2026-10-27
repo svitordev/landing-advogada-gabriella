@@ -1,6 +1,6 @@
-# COMPONENT-CATALOG.md — Svitordev UI Lab
+# COMPONENT-CATALOG.md — Maria Gabriella (inventário herdado do Svitordev UI Lab)
 
-Índice documental dos componentes reutilizáveis. Catálogo vivo = `/library` (visual) + este índice (documental).
+Índice documental dos componentes reutilizáveis. Catálogo vivo = `/library` (visual) + este índice (documental). Inventário real preservado do template — nenhum componente foi apagado ou renomeado.
 
 ## Contagem total
 
@@ -123,6 +123,22 @@
 | Library layout | `app/library/layout.tsx` | Wrapper que aplica `SectionsShell` |
 
 ---
+
+## Potencial uso na landing (planejamento — não altera contagens nem status)
+
+Mapeamento apenas indicativo, para a composição futura (ver `docs/ROADMAP-LANDING.md`):
+
+| Seção proposta | Componentes potencialmente úteis |
+|---|---|
+| Header | `header-with-topbar` ou `header-basic` (+ `MobileNav`) |
+| Hero institucional | `hero-media-showcase` / `hero-center-cta` (data-driven; foto real pendente) |
+| Áreas de atuação | `services-with-icons` / `services-grid-simple` |
+| Sobre a advogada | `about-split` / `about-timeline` |
+| Atendimento | `contact-details` / `contact-split` |
+| Conteúdo informativo | blog herdado (conteúdo de demonstração — conteúdo da cliente pendente) |
+| FAQ | nenhum componente existe — seria criação nova (`LAB_CANDIDATE` em potencial) |
+| Contato | `contact-simple` / `contact-details` |
+| Footer | `footer-columns` |
 
 ## Observações de reutilização
 

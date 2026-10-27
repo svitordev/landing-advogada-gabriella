@@ -1,44 +1,32 @@
-# Svitordev UI Lab
+# Maria Gabriella — Advocacia Personalizada
 
-Repositório base (**GitHub Template**) que acelera a criação de futuros projetos frontend.
+Landing page institucional da advogada **Maria Gabriella**. Este repositório é um projeto **independente**, criado a partir do código do **Svitordev UI Lab** (origem histórica do template — ver `memory-bank/`).
 
-## O que é
+## Estado atual
 
-**Svitordev UI Lab** — uma biblioteca/laboratório/template reutilizável construída com Next.js, React, TypeScript e Tailwind CSS. Serve como ponto de partida para:
-
-- landing pages;
-- blogs;
-- sites institucionais;
-- portfólios;
-- SaaS;
-- dashboards;
-- páginas de produto;
-- sites para clientes.
+- **Fase:** bootstrap documental concluído — a landing **ainda não está implementada**.
+- **Código:** herdado do template, ainda **não personalizado** para a cliente (rotas, `/library`, blog de demonstração, tokens e tema atuais são os do UI Lab).
+- **Roadmap ativo deste projeto:** `docs/ROADMAP-LANDING.md`.
+- `docs/ROADMAP-1000-EVOLUTIONS.md` é referência histórica do UI Lab, **não** é o roadmap deste projeto.
 
 ## Objetivo
 
-Permitir montar rapidamente um novo projeto a partir de peças reutilizáveis (componentes, seções, layouts, padrões), alterando apenas identidade visual e conteúdo.
+Apresentação profissional sóbria e informativa: áreas de atuação, apresentação da advogada, forma de atendimento e canais de contato — em conformidade com o Estatuto da Advocacia, o Código de Ética e Disciplina da OAB e o Provimento 205/2021 (verificar vigência antes da publicação).
 
-## GitHub Template
+## Público e região (preliminar)
 
-Para usar como base de um projeto novo:
+Advocacia personalizada, com atendimento indicado nas referências visuais para **Surubim — PE**, **Caruaru — PE** e região próxima (`PENDENTE_CONFIRMACAO_CLIENTE`).
 
-1. Acesse **Use this template** no GitHub.
-2. Crie um novo repositório a partir deste.
-3. Selecione componentes/seções/layouts.
-4. Altere a identidade visual (cores, fontes, branding) e o conteúdo.
-5. Monte o novo projeto.
-
-## Stack
+## Stack real
 
 - Next.js 16.0.3 (App Router)
 - React 19.2.0 / React DOM 19.2.0
 - TypeScript 5 (strict)
-- Tailwind CSS 4
+- Tailwind CSS 4 (configuração inline em `app/globals.css`)
 - shadcn/ui (style new-york)
-- `tw-animate-css`
-- lucide-react
-- ESLint 9
+- `tw-animate-css`, lucide-react
+- ESLint 9 (flat config)
+- Playwright 1.64.1 (smoke e2e)
 
 ## Como executar
 
@@ -54,47 +42,65 @@ Outros comandos:
 - `npm run build` — build de produção.
 - `npm run start` — servir o build de produção.
 - `npm run lint` — verificar qualidade com ESLint.
-
-## Como navegar em `/library`
-
-`/library` é o showcase oficial dos componentes e seções. Cada categoria lista as variações disponíveis com preview visual. Use a navegação do próprio `/library` para explorar `headers`, `footers`, `hero`, `about`, `services`, `testimonials`, `pricing`, `contact` e `cta`.
+- `npm run test:e2e` — testes Playwright (smoke).
 
 ## Estrutura geral
 
 ```
-app/              # Páginas + layouts (App Router)
+app/              # Páginas + layouts (App Router) — conteúdo ainda é o do template
 components/
   ui/             # Componentes base shadcn/ui
   site/           # Headers + footers
   sections/       # Seções reutilizáveis
 lib/              # Utilitários
-public/           # Assets
+public/           # Assets (apenas SVGs padrão do template por enquanto)
 docs/             # Documentação
 memory-bank/      # Memória do projeto
+tests/            # Smoke tests Playwright
 ```
 
 Estrutura oficial: `app/`, `components/`, `lib/`, `public/`. `src/` **não** será introduzido.
 
-## Filosofia de reutilização
+## Identidade visual (PROPOSTA — ainda não aplicada)
 
-- Reutilizar antes de duplicar.
-- Cada peça deve ser fácil de personalizar (cores, fontes, branding) e remover.
-- Evitar component inflation e duplicações.
-- Uma nova variante é válida quando traz diferença real (estrutura, composição, hierarquia, layout, comportamento, interação, caso de uso, responsividade ou estilo visual substancial).
+Paleta estimada a partir das referências visuais da marca (valores aproximados, sujeitos a validação — o CSS atual ainda usa os tokens do template):
 
-## Estado atual
+| Papel | Cor aproximada |
+|---|---|
+| Vinho principal | `#3D1717` |
+| Marrom profundo | `#412726` |
+| Bege | `#EEE5DB` |
+| Off-white | `#FBF6F3` |
+| Taupe | `#9E8277` |
 
-Fundação documental concluída (FASE 2):
+Direção tipográfica preliminar: títulos em serifada elegante (ex.: Playfair Display ou Cormorant Garamond); corpo em sans-serif limpa (ex.: Inter). **Nenhuma fonte foi instalada ainda.** Detalhes em `docs/DESIGN-SYSTEM.md`.
 
-- Arquitetura, sistema de design e catálogo documentados.
-- Decisões arquiteturais registradas em `memory-bank/DECISIONS.md`.
-- Critérios de evolução definidos em `docs/DEFINITION-OF-DONE.md`.
+**Assets:** o logotipo/monograma e a fotografia profissional da marca **ainda não estão no workspace** e precisarão ser disponibilizados (`PENDENTE_CONFIRMACAO_CLIENTE`).
 
-## Como contribuir / evoluir
+## Áreas de atuação (preliminar — validar com a profissional)
 
-1. Leia `AGENTS.md` e `docs/DEFINITION-OF-DONE.md`.
-2. Siga a arquitetura e os tokens existentes.
-3. Atualize `docs/COMPONENT-CATALOG.md` e `docs/` quando a alteração impactar a documentação.
-4. Revisse `git diff` antes de qualquer `commit`.
+1. Inventário e partilha;
+2. Testamento e planejamento sucessório;
+3. Usucapião extrajudicial e judicial;
+4. Regularização de imóveis urbanos e rurais;
+5. Elaboração e revisão de contratos;
+6. Divórcio extrajudicial.
 
-> **Problema conhecido:** `app/(site)/blog/[slug]/page.tsx` está vazio no baseline, o que quebra o `next build`. Será tratado posteriormente (não corrigido nesta fase).
+## O que falta para produção
+
+- Validação dos dados da cliente (OAB, contatos, endereço, formação) — nada foi inventado; ver `PROJETO.md`.
+- Assets oficiais (logotipo/monograma e fotografia).
+- Aplicação da identidade visual (tokens + fontes) — hoje o site ainda usa a identidade do template.
+- Composição da landing com os componentes existentes (`docs/ROADMAP-LANDING.md`).
+- Conteúdo jurídico revisado e aprovado pela advogada (inclusive FAQ e conteúdos informativos).
+- SEO, acessibilidade, responsividade, performance e LGPD conforme `docs/DEFINITION-OF-DONE.md`.
+
+## Documentos importantes
+
+- `AGENTS.md` — instruções para agentes (inclui publicidade jurídica).
+- `PROJETO.md` — visão, escopo, critérios de aceite e pendências.
+- `docs/ROADMAP-LANDING.md` — roadmap ativo deste projeto.
+- `docs/ARQUITETURA.md`, `docs/DESIGN-SYSTEM.md`, `docs/COMPONENT-CATALOG.md`, `docs/DEFINITION-OF-DONE.md`.
+- `memory-bank/` — estado, decisões e changelog.
+
+> **Problema conhecido herdado:** `docs/QUALITY-REVIEW.md` registra findings abertos do template (ex.: QLT-013 — datas com timezone). Verificados contra o código atual.

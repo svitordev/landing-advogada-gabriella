@@ -1,6 +1,6 @@
-# DEFINITION-OF-DONE.md — Svitordev UI Lab
+# DEFINITION-OF-DONE.md — Maria Gabriella
 
-Critérios para uma evolução (componente, seção, layout, página, infraestrutura, documentação) ser considerada concluída.
+Critérios para uma evolução (componente, seção, layout, página, infraestrutura, documentação) ser considerada concluída. Gates técnicos preservados do UI Lab; critérios de landing adicionados conforme contexto.
 
 ## Crítico (obrigatório)
 
@@ -23,6 +23,18 @@ Critérios para uma evolução (componente, seção, layout, página, infraestru
 - [ ] **Testes** — cobertura proporcional à mudança.
 - [ ] **Performance** — sem regressão de bundle/rendimento.
 - [ ] **Design tokens** — uso de cores/espaçamento temáticos, sem hardcoded.
+
+## Critérios específicos da landing (proporcionais ao contexto)
+
+- [ ] **Responsividade** — todas as seções da landing corretas em mobile, tablet e desktop.
+- [ ] **Acessibilidade** — WCAG na prática: contraste, rótulos, teclado, ordem de leitura, `alt` real nas fotos.
+- [ ] **Performance** — imagens otimizadas, sem regressão de bundle; fontes carregadas sem flash indevido.
+- [ ] **SEO** — metadata por página (título, descrição, OG), dados estruturados quando aplicável (ver QLT-002).
+- [ ] **Conteúdo profissional revisado** — todo texto jurídico/publicitário revisado e **aprovado pela advogada** antes da publicação.
+- [ ] **Identidade visual** — paleta/tipografia aplicadas conforme aprovadas (ver proposta em `docs/DESIGN-SYSTEM.md`).
+- [ ] **Dados de contato confirmados** — nada publicado com `PENDENTE_CONFIRMACAO_CLIENTE` pendente.
+- [ ] **LGPD** — tratamento de dados de contato/ formulários com base legal e política adequada.
+- [ ] **Ética OAB** — sem promessa de resultado, comparação, mercantilização ou caso publicado sem autorização (ver `AGENTS.md`).
 
 ## Registro de qualidade
 

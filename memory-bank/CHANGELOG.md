@@ -1,8 +1,21 @@
-# CHANGELOG — Svitordev UI Lab
+# CHANGELOG — Maria Gabriella — Advocacia Personalizada
 
-Registro de mudanças técnicas importantes ao longo da evolução. Formato inspirado em Keep a Changelog.
+Registro de mudanças importantes ao longo da evolução. Formato inspirado em Keep a Changelog.
 
 ---
+
+## [2026-10-27] — Bootstrap documental do novo projeto (documental — nenhuma mudança funcional)
+
+- Repositório passa a ser o projeto **independente** da landing **Maria Gabriella — Advocacia Personalizada**, criado a partir do código do Svitordev UI Lab (sem sincronização automática).
+- Documentos atualizados: `README.md`, `PROJETO.md`, `AGENTS.md`, `.github/copilot-instructions.md`, `docs/ARQUITETURA.md`, `docs/DESIGN-SYSTEM.md`, `docs/COMPONENT-CATALOG.md`, `docs/DEFINITION-OF-DONE.md`, `memory-bank/CURRENT-STATE.md`, `memory-bank/DECISIONS.md` (DEC-011; DEC-010 marcada como histórica), `docs/ROADMAP-1000-EVOLUTIONS.md` (nota de origem) e `QUALITY-REVIEW.md` (nota de origem).
+- Documento criado: `docs/ROADMAP-LANDING.md` (roadmap ativo).
+- Identidade visual (paleta/tipografia) registrada como **PROPOSTA** — `app/globals.css` não foi alterado; nenhuma fonte instalada; nenhum componente criado; nenhuma página criada.
+- Dados não confirmados da cliente usam a marcação `PENDENTE_CONFIRMACAO_CLIENTE`. A landing **não** está implementada.
+- Sem mudanças em `app/`, `components/`, `lib/`, `public/`, configs, testes ou dependências. Sem commit nesta sessão.
+
+---
+
+## Histórico do Svitordev UI Lab (origem do código — preservado como referência)
 
 ## [2026-10-26] — Evolução 010: HeroCenterCta data-driven (VERIFIED)
 

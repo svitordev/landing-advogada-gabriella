@@ -1,5 +1,7 @@
 # Svitordev UI Lab — Quality Review
 
+> **Nota de origem (2026-10-27):** documento herdado do Svitordev UI Lab junto com o código. Os findings descrevem o código deste repositório (ainda herdado) e continuam válidos como referência técnica. Projeto atual: landing Maria Gabriella — ver `README.md` e `docs/ROADMAP-LANDING.md`.
+
 > FASE 1 — Baseline / revisão estática consolidada.
 > NENHUMA correção executada nesta revisão. Este arquivo é a única saída permitida.
 > **Nota:** o baseline abaixo é o **histórico** da revisão inicial (2026-10-01). O estado atual está registrado nas seções "Estado após verificação do QLT-001" e "Estado após Playwright mínimo pré-rotina".

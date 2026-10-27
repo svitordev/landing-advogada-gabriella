@@ -1,6 +1,8 @@
-# DECISIONS — Svitordev UI Lab
+# DECISIONS — Maria Gabriella (decisões herdadas do Svitordev UI Lab + decisões deste projeto)
 
 Decisões arquiteturais aprovadas. Uma decisão por entrada: o que foi decidido, por quê, quando e o impacto.
+
+DEC-001 a DEC-010 são do UI Lab (origem do código). As que seguem estruturalmente válidas para este repositório (estrutura, tokens, Playwright, memory bank, instruções) continuam aplicáveis; decisões exclusivas do UI Lab estão identificadas como **históricas** — preservadas, não apagadas.
 
 ---
 
@@ -67,9 +69,17 @@ Decisões arquiteturais aprovadas. Uma decisão por entrada: o que foi decidido,
 - **Data:** 2026-09-30
 - **Impacto:** Não criar JSON/YAML registry nesta fase.
 
-## DEC-010 — Roadmap de 1000 evoluções
+## DEC-010 — Roadmap de 1000 evoluções (histórica — exclusiva do UI Lab, não se aplica a este projeto)
 
 - **Decisão:** 1000 objetivos macro; detalhar apenas os próximos 25; reavaliar antes de cada novo lote; auditoria a cada 100.
 - **Motivo:** Detalhar 25 por vez mantém foco, permite reavaliação e evita component inflation e duplicações.
 - **Data:** 2026-09-30
 - **Impacto:** Não criar o roadmap nem desafios nesta fase.
+- **Nota (2026-10-27):** decisão exclusiva do UI Lab. Neste repositório, o roadmap ativo é `docs/ROADMAP-LANDING.md`; o roadmap das 1000 evoluções fica preservado como referência histórica, com arquivamento a propor para aprovação futura.
+
+## DEC-011 — Repositório independente da landing Maria Gabriella
+
+- **Decisão:** Este repositório é um projeto independente (landing da advogada Maria Gabriella), criado a partir do código do UI Lab. Não há sincronização automática com o repositório original. Dados da cliente ficam nas páginas/arquivos de configuração do projeto, nunca em componentes genéricos. Convenção futura documentada (não implementada): `PROJECT_ONLY` / `LAB_CANDIDATE` / `LAB_PROMOTED`; componentes promovidos ao UI Lab serão generalizados em trabalho separado. Não criar registry, monorepo ou pacote npm nesta fase.
+- **Motivo:** Separar o produto final da cliente do laboratório de origem, preservando os componentes reutilizáveis e evitando acoplamento entre repositórios.
+- **Data:** 2026-10-27
+- **Impacto:** Documentação adaptada (README, PROJETO, AGENTS, docs/). Código permanece herdado e ainda não personalizado. Identidade visual registrada como proposta, sem alterar `globals.css`.

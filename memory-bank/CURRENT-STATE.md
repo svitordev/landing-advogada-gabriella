@@ -1,12 +1,20 @@
-# CURRENT-STATE — Svitordev UI Lab
+# CURRENT-STATE — Maria Gabriella — Advocacia Personalizada
 
 Snapshot curto do estado atual do repositório. Não copiar toda a documentação.
 
 ## Estado atual
 
-Repositório base (GitHub Template) em fase de **fundação documental**.
+Projeto **independente** (landing page institucional da advogada Maria Gabriella), criado a partir do código do Svitordev UI Lab.
 
-- **Fase atual:** FASE 2 — Documentação.
+- **Fase atual:** bootstrap documental concluído (2026-10-27). Landing em **planejamento** — nada implementado ainda.
+- **Código:** herdado do template, ainda **não personalizado** (rotas, `/library`, blog de demo, tokens roxos/Geist, dark padrão).
+- **Roadmap ativo:** `docs/ROADMAP-LANDING.md`. O roadmap das 1000 evoluções é histórico (origem UI Lab).
+- **Pendências:** dados da cliente (`PENDENTE_CONFIRMACAO_CLIENTE`), assets oficiais (logo/monograma, fotografia), identidade visual a aplicar.
+- **Próximo passo técnico recomendado:** sessão separada de planejamento da composição visual da landing (fase 2/3 do `docs/ROADMAP-LANDING.md`), usando os componentes existentes.
+
+### Estado herdado do UI Lab (histórico — descreve o código, ainda válido como estado técnico)
+
+- **Fase original:** FASE 2 — Documentação (UI Lab).
 - **Preparação técnica pré-rotina:** concluída.
 - **Roadmap:** macro aprovado e versionado em `docs/ROADMAP-1000-EVOLUTIONS.md`.
 - **Lote ativo:** 001–025.
@@ -68,9 +76,9 @@ Production build **verde** (PASS). Lint atual: **0 errors / 0 warnings**. Rota `
 - **Total de findings:** 13 (QLT-001, QLT-006, QLT-007 e QLT-012 VERIFIED; os demais permanecem pendentes).
 - **Fonte compartilhada de posts:** `lib/blog.ts` (usada pela listagem e pela rota dinâmica).
 
-### Próxima fase
+### Próxima fase (histórica — do UI Lab, não se aplica a este projeto)
 
-Roadmap macro versionado em `docs/ROADMAP-1000-EVOLUTIONS.md` (lote ativo 001–025). Evoluções 001–010 VERIFIED. Próxima execução: Evolução 011 (Feature comparison).
+No UI Lab original: roadmap macro em `docs/ROADMAP-1000-EVOLUTIONS.md`, lote ativo 001–025, evoluções 001–010 VERIFIED. Aqui, o roadmap ativo é `docs/ROADMAP-LANDING.md`.
 
 ### Problemas resolvidos
 

@@ -1,40 +1,40 @@
-# AGENTS.md — Svitordev UI Lab
+# AGENTS.md — Maria Gabriella — Advocacia Personalizada
 
 Ponto de entrada principal para qualquer Agent. Leia antes de agir.
 
 ## O que é
 
-**Svitordev UI Lab** — repositório base (GitHub Template) que acelera a criação de futuros projetos frontend: landing pages, blogs, sites institucionais, portfólios, SaaS, dashboards, páginas de produto e sites para clientes.
+Landing page institucional da advogada **Maria Gabriella** — projeto **independente**, criado a partir do código do **Svitordev UI Lab** (origem histórica; não há sincronização automática entre repositórios).
 
-A ideia é usar **GitHub Template** → criar novo repositório → selecionar componentes/seções/layouts → alterar identidade visual e conteúdo → montar rapidamente um novo projeto.
+Objetivo: apresentação profissional sóbria e informativa (áreas de atuação, formação, atendimento e contato), respeitando as restrições de publicidade jurídica da OAB.
 
-## Objetivo
-
-Servir como biblioteca/laboratório/template reutilizável, evoluída continuamente (primitivos, UI components, sections, patterns, layouts, compositions, páginas, animações, responsividade, acessibilidade, design tokens, temas, showcase, documentação, testes).
-
-Stack confirmada: **Next.js 16.0.3 (App Router) + React 19.2 + TypeScript 5 + Tailwind CSS 4 + shadcn/ui + ESLint 9.**
+Stack confirmada: **Next.js 16.0.3 (App Router) + React 19.2 + TypeScript 5 + Tailwind CSS 4 + shadcn/ui + ESLint 9 + Playwright.**
 
 ## Arquitetura resumida
 
 ```
-app/              # Next.js App Router (páginas + layouts)
+app/              # Next.js App Router (páginas + layouts) — conteúdo herdado do template
 components/
-  ui/             # 4 componentes base shadcn/ui
-  site/           # 6 componentes (headers + footers)
-  sections/       # 21 seções (7 grupos × 3)
-lib/              # utils (cn)
-public/           # assets
+  ui/             # 6 componentes base shadcn/ui
+  site/           # 7 componentes (headers + footers)
+  sections/       # 26 seções + shell da /library
+lib/              # utils (cn) + fonte de dados do blog
+public/           # assets (apenas SVGs padrão do template)
 docs/             # documentação
 memory-bank/      # memória do projeto
+tests/            # smoke tests Playwright
 ```
+
+Inventário real completo em `docs/COMPONENT-CATALOG.md` (41 componentes relevantes). O código herdado ainda não foi personalizado para a cliente.
 
 Estrutura oficial é `app/`, `components/`, `lib/`, `public/`. **`src/` não será introduzido.** Categorias novas (`layouts/`, `patterns/`, `compositions/`) só quando houver necessidade real.
 
 ## Documentos importantes
 
-- `PROJETO.md` — visão do produto e filosofia.
-- `docs/ARQUITETURA.md` — arquitetura real.
-- `docs/DESIGN-SYSTEM.md` — sistema de design.
+- `PROJETO.md` — visão, escopo, critérios de aceite e pendências da cliente.
+- `docs/ROADMAP-LANDING.md` — roadmap ativo deste projeto.
+- `docs/ARQUITETURA.md` — arquitetura real (implementada × herdada × planejada).
+- `docs/DESIGN-SYSTEM.md` — tokens existentes + identidade proposta (PROPOSTA, não aplicada).
 - `docs/COMPONENT-CATALOG.md` — inventário de componentes.
 - `docs/DEFINITION-OF-DONE.md` — critérios de evolução concluída.
 - `memory-bank/` — estado, decisões, changelog.
@@ -48,6 +48,28 @@ Estrutura oficial é `app/`, `components/`, `lib/`, `public/`. **`src/` não ser
 5. **Seguir a Definition of Done** para qualquer evolução.
 6. **Não instalar dependências sem necessidade.**
 7. **Idioma:** português-BR para respostas e documentação.
+8. **Não inventar dados da cliente.** Informação não confirmada usa a marcação `PENDENTE_CONFIRMACAO_CLIENTE`.
+
+## Restrições de publicidade jurídica (OAB)
+
+O projeto deve considerar o Estatuto da Advocacia, o Código de Ética e Disciplina da OAB e o Provimento 205/2021 (https://www.oab.org.br/leisnormas/legislacao/provimentos/205-2021) — verificar alterações normativas antes da publicação.
+
+A comunicação deve ser: informativa, sóbria, discreta, profissional, objetiva e verdadeira.
+
+Evitar: promessas de resultados; garantias de vitória; alegações de superioridade; comparações com outros profissionais; ofertas e descontos; publicidade mercantilista; divulgação indevida de clientes, processos ou resultados; estatísticas não verificadas; depoimentos ou casos reais publicados sem avaliação ética e autorização apropriada.
+
+A versão destinada à produção deverá ser aprovada pela advogada, inclusive o conteúdo jurídico e publicitário.
+
+## Convenção de componentes (documentada, não implementada)
+
+- Dados da advogada ficam nas **páginas ou arquivos de configuração próprios do projeto**, nunca embutidos em componentes genéricos.
+- Componentes verdadeiramente reutilizáveis criados futuramente poderão ser generalizados e promovidos ao UI Lab em **trabalho separado**.
+- Classificações futuras: `PROJECT_ONLY` (deste projeto), `LAB_CANDIDATE` (potencialmente reutilizável), `LAB_PROMOTED` (incorporado ao UI Lab após validação e versionamento próprios).
+- Não criar registry, monorepo ou pacote npm nesta fase.
+
+## Fluxo de trabalho
+
+Plan → implementação → testes → documentação → revisão de Git. Mudanças relevantes passam por aprovação quando houver risco.
 
 ## Uso das Skills
 
@@ -58,9 +80,9 @@ Estrutura oficial é `app/`, `components/`, `lib/`, `public/`. **`src/` não ser
 
 ## Qualidade
 
-Toda evolução deve satisfazer a `docs/DEFINITION-OF-DONE.md` (TypeScript, lint, build, responsividade, acessibilidade, teclado, reduced-motion, overflow, documentação, catálogo).
+Toda evolução deve satisfazer a `docs/DEFINITION-OF-DONE.md` (TypeScript, lint, build, responsividade, acessibilidade, teclado, reduced-motion, overflow, SEO, LGPD, documentação, catálogo, aprovação da profissional).
 
-**Playwright = P1 antes da rotina das 1000 evoluções. Visual regression = posterior.**
+**Playwright disponível (`npm run test:e2e`) — deve permanecer verde quando a mudança afetar rotas/navegação.**
 
 ## Política de dependências
 

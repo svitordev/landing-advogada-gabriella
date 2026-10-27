@@ -1,6 +1,6 @@
-# DESIGN-SYSTEM.md — Svitordev UI Lab
+# DESIGN-SYSTEM.md — Maria Gabriella
 
-Sistema de design real atual. Não alterar `app/globals.css` nesta fase.
+Sistema de design real atual (herdado do Svitordev UI Lab, ainda não personalizado). A identidade da nova marca está documentada abaixo como **PROPOSTA** — `app/globals.css` ainda não foi alterado.
 
 ## Base
 
@@ -47,6 +47,31 @@ Sistema de design real atual. Não alterar `app/globals.css` nesta fase.
 
 - `@custom-variant dark` define o suporte a dark mode via classe `dark`.
 - Layout raiz aplica `className="dark"` (dark por padrão).
+
+## Nova identidade visual — PROPOSTA (não aplicada)
+
+> Estado: **proposta documental**. Nenhum valor abaixo está no CSS hoje — `globals.css` continua com os tokens do template (brand roxo, fontes Geist). Aplicação será tarefa própria do roadmap (`docs/ROADMAP-LANDING.md`, fase 4).
+
+Paleta estimada a partir das referências visuais da marca — valores aproximados, sujeitos a validação:
+
+| Papel | Cor aproximada |
+|---|---|
+| Vinho principal | `#3D1717` |
+| Marrom profundo | `#412726` |
+| Bege | `#EEE5DB` |
+| Off-white | `#FBF6F3` |
+| Taupe | `#9E8277` |
+
+Direção tipográfica preliminar:
+
+- **Títulos:** serifada elegante (ex.: Playfair Display ou Cormorant Garamond);
+- **Corpo:** sans-serif limpa (ex.: Inter).
+
+**Nenhuma fonte foi instalada e nenhum token foi alterado nesta fase.**
+
+Direção geral: elegância, sobriedade, legibilidade, tipografia editorial, boa hierarquia visual, fotografia profissional, identidade coerente com o monograma existente, responsividade e acessibilidade.
+
+**Assets:** logotipo/monograma e fotografia profissional ainda **não estão no workspace** — precisarão ser disponibilizados (`PENDENTE_CONFIRMACAO_CLIENTE`).
 
 ## A EXPANDIR (tarefa técnica posterior)
 

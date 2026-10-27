@@ -1,94 +1,80 @@
-# PROJETO.md — Svitordev UI Lab
+# PROJETO.md — Maria Gabriella — Advocacia Personalizada
 
-Visão do produto, finalidade e filosofia do projeto.
+Visão, escopo e filosofia deste projeto. Este repositório foi criado a partir do **Svitordev UI Lab** e agora é um projeto independente.
 
 ## O que é
 
-**Svitordev UI Lab** — repositório base (GitHub Template) que acelera a criação de futuros projetos frontend.
+Landing page institucional da advogada **Maria Gabriella** — apresentação profissional, áreas de atuação, forma de atendimento e canais de contato.
 
 ## Objetivo
 
-Servir como biblioteca/laboratório/template reutilizável para montar rapidamente:
+Comunicação **informativa, sóbria, discreta, profissional, objetiva e verdadeira**, em conformidade com o Estatuto da Advocacia, o Código de Ética e Disciplina da OAB e o Provimento 205/2021 (vigência a verificar antes da publicação).
 
-- landing pages;
-- blogs;
-- sites institucionais;
-- portfólios;
-- SaaS;
-- dashboards;
-- páginas de produto;
-- sites para clientes.
+## Público
 
-## GitHub Template
+Pessoas e empresas atendidas pela profissional. Região indicada nas referências visuais: **Surubim — PE**, **Caruaru — PE** e região próxima (`PENDENTE_CONFIRMACAO_CLIENTE`).
+## Escopo
 
-Quando aparecer um projeto real:
+**Inclui (planejamento — ainda não implementado):**
 
-1. Usar **GitHub Template** → criar novo repositório.
-2. Selecionar componentes/seções/layouts existentes.
-3. Alterar identidade visual (cores, fontes, branding).
-4. Alterar conteúdo.
-5. Montar rapidamente o novo projeto.
+- Landing page pública de uma página (seções abaixo);
+- Reaproveitamento dos componentes herdados do template;
+- Identidade visual própria (proposta em `docs/DESIGN-SYSTEM.md`, ainda não aplicada);
+- Conteúdo informativo/educativo e FAQ, sujeitos à aprovação da profissional.
 
-O template deve permitir remover/adicinar peças com facilidade, sem acoplamento a um projeto único.
+**Não inclui (por ora):** blog ativo com conteúdo da cliente (existe no código como herança do template, com conteúdo de demonstração), área logada, formulário com backend, multilíngue.
 
-## Filosofia de reutilização
+## Seções propostas (estrutura preliminar)
 
-- Reutilizar antes de duplicar.
-- Cada peça deve ser autossuficiente e fácil de personalizar.
-- Evitar component inflation e duplicações.
-- Uma nova variante é válida quando traz diferença real (estrutura, composição, hierarquia, layout, comportamento, interação, caso de uso, responsividade ou estilo visual substancial) — não apenas texto ou cor.
+1. **Header** — identidade da marca, navegação e contato.
+2. **Hero institucional** — foto profissional, apresentação objetiva, título e ações de navegação/contato.
+3. **Áreas de atuação** — atividades profissionais confirmadas (lista preliminar no README; validar com a profissional).
+4. **Sobre a advogada** — apresentação profissional, formação e OAB após confirmação.
+5. **Atendimento** — informações sobre o atendimento e a região atendida.
+6. **Conteúdo informativo** — artigos/conteúdos jurídicos educativos, quando disponibilizados e aprovados.
+7. **FAQ** — perguntas frequentes com respostas informativas, sujeitas à revisão da profissional.
+8. **Contato** — canais oficiais confirmados e informações de atendimento.
+9. **Footer** — identificação profissional, inscrição na OAB, contatos e links necessários.
 
-## Estrutura oficial
+## Requisitos
 
-```
-app/
-components/
-  ui/
-  site/
-  sections/
-lib/
-public/
-docs/
-memory-bank/
-```
+- Ética OAB: sem promessa de resultado, sem garantia de vitória, sem alegação de superioridade, sem comparação com outros profissionais, sem ofertas/descontos, sem mercantilização, sem divulgação indevida de clientes/processos/resultados, sem estatísticas não verificadas, sem depoimentos sem avaliação ética e autorização.
+- A peça visual que compara uma área imobiliária com o Vaticano é **referência de design**, não case público: uso de caso concreto exige avaliação de sigilo, autorização e adequação normativa.
+- Responsividade, acessibilidade e performance conforme `docs/DEFINITION-OF-DONE.md`.
+- SEO básico por página (ver finding QLT-002).
+- LGPD no tratamento de dados de contato.
 
-`src/` **não** será introduzido. Categorias novas só quando houver necessidade real.
+## Critérios de aceite
 
-## Objetivos de longo prazo
+- Nenhum dado profissional inventado: informação não confirmada permanece marcada como `PENDENTE_CONFIRMACAO_CLIENTE`.
+- Conteúdo jurídico e publicitário revisado e **aprovado pela advogada** antes da publicação.
+- Gates técnicos da `docs/DEFINITION-OF-DONE.md` verdes (lint, build, testes, responsividade, acessibilidade).
+- Identidade visual aplicada conforme aprovada (tokens/fontes), sem alterar componentes genéricos com dados da cliente.
 
-Evoluir continuamente com:
+## Limitações
 
-- primitives, UI components, sections, patterns, layouts, compositions, páginas completas;
-- diferentes estilos visuais, animações, responsividade, acessibilidade;
-- design tokens, temas, showcase, catálogo;
-- testes, visual testing, quality gates;
-- documentação, automações.
+- Paleta e tipografia atuais são **estimativas visuais** das referências enviadas, não valores oficiais da marca.
+- Logotipo/monograma e fotografia profissional ainda não estão no workspace.
+- A landing está em fase de planejamento; nada foi implementado nesta etapa.
 
-## Conceito das 1000 evoluções
+## Pendências da cliente (`PENDENTE_CONFIRMACAO_CLIENTE`)
 
-Futuramente existirão **1000 objetivos macro** de evolução, que poderão envolver:
+- Inscrição na OAB (número/seccional);
+- Endereço profissional;
+- E-mail profissional;
+- Telefone oficial;
+- Anos de experiência;
+- Formação acadêmica e títulos;
+- Certificações/qualificações;
+- Lista definitiva de áreas de atuação;
+- Região atendida;
+- Depoimentos/estatísticas (somente com autorização e avaliação ética);
+- Assets oficiais: logotipo/monograma e fotografia profissional.
 
-- componentes, seções, layouts, páginas;
-- infraestrutura, acessibilidade, testes, animações;
-- auditorias, documentação, compositions completas.
+## Roadmap inicial
 
-Regra de execução:
+Roadmap ativo: `docs/ROADMAP-LANDING.md` (sem estimativas de prazo). O `docs/ROADMAP-1000-EVOLUTIONS.md` é do UI Lab — preservado como referência histórica, com arquivamento a propor futuramente.
 
-- detalhar apenas os próximos **25** por vez;
-- reavaliar antes de abrir o próximo lote;
-- auditoria a cada **100**.
+## Relação com o Svitordev UI Lab
 
-O roadmap oficial versionado está em `docs/ROADMAP-1000-EVOLUTIONS.md`.
-
-## O que pertence ao projeto
-
-- Peças reutilizáveis (componentes, seções, layouts, padrões).
-- Sistema de design (tokens, temas).
-- Showcase (`/library`) e catálogo (`docs/COMPONENT-CATALOG.md`).
-- Documentação e infraestrutura de qualidade.
-
-## O que NÃO pertence ao projeto
-
-- Um produto/cliente específico com branding fixo.
-- Conteúdo hardcoded de um projeto real (deve ser removível).
-- Um único "app" monolítico — o repositório é a base, não o destino final de um cliente.
+O UI Lab foi a **fonte inicial** de componentes e arquitetura. Este repositório é independente: não há sincronização automática. Convenção de classificação (documentada, não implementada): `PROJECT_ONLY` (deste projeto), `LAB_CANDIDATE` (potencialmente reutilizável), `LAB_PROMOTED` (incorporado ao UI Lab em trabalho separado). Ver `memory-bank/DECISIONS.md` (DEC-011).

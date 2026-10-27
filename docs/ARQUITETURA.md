@@ -1,6 +1,14 @@
-# ARQUITETURA.md — Svitordev UI Lab
+# ARQUITETURA.md — Maria Gabriella (landing page)
 
-Arquitetura real atual do repositório.
+Arquitetura real atual do repositório. Este projeto é independente e foi criado a partir do código do Svitordev UI Lab (origem histórica).
+
+## Legenda de estado
+
+- **Implementado (código real):** tudo que este documento descreve — App Router, route group `(site)`, `/library`, componentes, Playwright. É código **herdado do template, ainda não personalizado** para a cliente.
+- **Herdado do template:** `/library`, blog com conteúdo de demonstração, tokens roxos/Geist, tema dark por padrão, metadata genérica.
+- **Planejado (não implementado):** composição da landing com conteúdo da cliente, identidade visual proposta, arquivos de configuração próprios. Ver `docs/ROADMAP-LANDING.md`.
+
+Não tratar funcionalidades planejadas como prontas.
 
 ## Stack
 
