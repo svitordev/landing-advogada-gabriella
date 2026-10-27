@@ -4,6 +4,20 @@ Registro de mudanças importantes ao longo da evolução. Formato inspirado em K
 
 ---
 
+## [2026-10-27] — Design Foundation institucional (VERIFIED)
+
+- **Tema claro como padrão:** classe `dark` fixa removida do root layout; bloco `.dark` de `globals.css` preservado (não adaptado à nova identidade); sem toggle/theme provider.
+- **Paleta vinho/bege aplicada** nos tokens `:root` de `app/globals.css` (OKLCH calibrado a partir das referências visuais — brand `oklch(0.302 0.09 27)`, background off-white, secondary/brand-soft bege, foreground marrom; `--muted-foreground` escurecido p/ 5.69:1; `--input` escurecido p/ ≈3.04:1 — WCAG 1.4.11; `--ring` vinho; sidebar tokens derivados).
+- **Fontes via `next/font/google`** (sem dependência nova): Inter 400/500/600 (corpo) + Playfair Display 500/600 (títulos), `display: swap`, variáveis `--font-inter`/`--font-playfair` ligadas no `@theme inline` (`--font-sans`/`--font-serif`); `h1,h2,h3` com `font-serif` via `@layer base` (afeta headings de todo o site, incl. `/library` e `/blog`); `--font-mono` preservado.
+- **Metadata institucional** no root layout (título + descrição informativa; nada inventado).
+- **Contraste medido** (Chromium): fg/bg 11.84 · primary-fg/primary 12.99 · secondary-fg/secondary 10.35 · muted-fg/bg 5.69 · muted-fg/muted 5.21 · bs-fg/bs 10.35 · input/bg 3.04 · ring/bg 12.99 · border/bg 1.41 (decorativo).
+- **Validação responsiva:** 375×667 e 1280×720 em `/`, `/library/headers`, `/library/hero`, `/blog` — tema claro ativo, fontes carregadas, zero overflow.
+- **Gates:** lint **0/0** · build **PASS** (16 rotas) · Playwright **26 passed + 2 skipped** (baseline preservado).
+- **Arquivos funcionais afetados:** `app/globals.css`, `app/layout.tsx` — somente eles.
+- **Nenhuma dependência nova; nenhum componente criado; nenhum asset criado** (logotipo/fotografia seguem `PENDENTE_CONFIRMACAO_CLIENTE`). Header/Hero da cliente ainda não implementados (Entrega B).
+
+---
+
 ## [2026-10-27] — Bootstrap documental do novo projeto (documental — nenhuma mudança funcional)
 
 - Repositório passa a ser o projeto **independente** da landing **Maria Gabriella — Advocacia Personalizada**, criado a partir do código do Svitordev UI Lab (sem sincronização automática).

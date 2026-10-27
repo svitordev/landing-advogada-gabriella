@@ -1,6 +1,6 @@
 # DESIGN-SYSTEM.md — Maria Gabriella
 
-Sistema de design real atual (herdado do Svitordev UI Lab, ainda não personalizado). A identidade da nova marca está documentada abaixo como **PROPOSTA** — `app/globals.css` ainda não foi alterado.
+Sistema de design real atual. A identidade institucional da marca está **IMPLEMENTADA** nos tokens de `app/globals.css` e no root layout (Entrega A — Design Foundation, VERIFIED 2026-10-27). Componentes específicos da cliente (Header/Hero) ainda não implementados — ver `docs/ROADMAP-LANDING.md`.
 
 ## Base
 
@@ -27,9 +27,9 @@ Sistema de design real atual (herdado do Svitordev UI Lab, ainda não personaliz
 
 ### Brand (identidade visual)
 
-- `--brand` — roxo (light: `oklch(0.55 0.20 280)`, dark: `oklch(0.70 0.18 280)`)
-- `--brand-foreground` — texto sobre o brand
-- `--brand-soft`, `--brand-soft-foreground` — variantes suaves do brand
+- `--brand` — **vinho** em `:root` (`oklch(0.302 0.09 27)` ≈ `#531713` em sRGB — aproximação do `#3D1717` de referência). No bloco `.dark` ainda mantém os valores originais do template (roxo) — preservado, **não adaptado** à nova identidade.
+- `--brand-foreground` — texto sobre o brand (`:root`: `oklch(0.975 0.012 60)` — off-white)
+- `--brand-soft`, `--brand-soft-foreground` — variantes suaves do brand (`:root`: bege/marrom — ver tabela de tokens implementados abaixo)
 
 ### Radius
 
@@ -37,7 +37,9 @@ Sistema de design real atual (herdado do Svitordev UI Lab, ainda não personaliz
 
 ### Fontes
 
-- `--font-sans` (Geist Sans), `--font-mono` (Geist Mono)
+- `--font-sans` → `var(--font-inter)` (**Inter**, via `next/font/google` — implementada)
+- `--font-serif` → `var(--font-playfair)` (**Playfair Display**, via `next/font/google` — implementada)
+- `--font-mono` (Geist Mono) — **preservado como estava**; a variável `--font-geist-mono` nunca foi definida por um loader (legado do template — fallback de sistema)
 
 ### Sidebar tokens (Tailwind 4 sidebar API)
 
@@ -45,33 +47,60 @@ Sistema de design real atual (herdado do Svitordev UI Lab, ainda não personaliz
 
 ### Light/dark
 
-- `@custom-variant dark` define o suporte a dark mode via classe `dark`.
-- Layout raiz aplica `className="dark"` (dark por padrão).
+- `@custom-variant dark` define o suporte a dark mode via classe `dark` — **preservado tecnicamente**.
+- O layout raiz **não aplica mais** `className="dark"` — o **tema claro é o padrão** (decisão da Entrega A). O bloco `.dark` existe no CSS, mas não está ativo por padrão e **não foi adaptado** à identidade vinho/bege.
+- Sem toggle e sem theme provider nesta versão.
 
-## Nova identidade visual — PROPOSTA (não aplicada)
+## Identidade visual — IMPLEMENTADA (Entrega A, 2026-10-27)
 
-> Estado: **proposta documental**. Nenhum valor abaixo está no CSS hoje — `globals.css` continua com os tokens do template (brand roxo, fontes Geist). Aplicação será tarefa própria do roadmap (`docs/ROADMAP-LANDING.md`, fase 4).
+> Estado: tokens de `:root`, fontes e metadata aplicados e validados (lint 0/0, build PASS, Playwright 26 passed + 2 skipped, verificação visual 375×667 e 1280×720 em `/`, `/library/headers`, `/library/hero`, `/blog` — zero overflow). Header e Hero específicos da cliente **ainda não implementados** (Entrega B). A mudança de tema/tokens **afeta visualmente todas as páginas herdadas**, incluindo `/library` e `/blog`.
 
-Paleta estimada a partir das referências visuais da marca — valores aproximados, sujeitos a validação:
+### Paleta de referência da marca (valores visuais de origem)
 
-| Papel | Cor aproximada |
+| Papel | Cor de referência | Token técnico implementado (`:root`) | Aproximação sRGB medida |
+|---|---|---|---|
+| Vinho principal | `#3D1717` | `--brand`/`--primary`/`--ring` = `oklch(0.302 0.09 27)` | `#531713` |
+| Marrom profundo | `#412726` | `--foreground`/`--card-foreground`/`--popover-foreground`/`--secondary-foreground`/`--brand-soft-foreground` = `oklch(0.325 0.05 35)` | `#4a2a22` |
+| Bege | `#EEE5DB` | `--secondary`/`--brand-soft`/`--accent` = `oklch(0.93 0.022 60)` | `#f3e5da` |
+| Off-white | `#FBF6F3` | `--background`/`--card`/`--popover`/`--brand-foreground` = `oklch(0.975 0.012 60)` | `#fdf5ef` |
+| Taupe | `#9E8277` | base do `--muted-foreground` escurecido = `oklch(0.50 0.05 45)` (≈ `#7c5a4c`) e `--border` = `oklch(0.865 0.03 55)` (≈ `#e3cec0`) | ver coluna |
+
+Tokens adicionais ajustados por coerência temática: `--muted` = `oklch(0.945 0.018 55)`; `--input` = `oklch(0.65 0.05 50)` (≈ `#a98774`); sidebar tokens derivados (`--sidebar`/`--sidebar-foreground`/`--sidebar-border`/`--sidebar-ring`). Os valores OKLCH são **aproximações calibradas** das referências visuais — equivalência exata não declarada; validação oficial da paleta com a cliente segue pendente (fase 2 do roadmap).
+
+### Tipografia implementada
+
+- **Corpo:** Inter — pesos **400, 500, 600** (`next/font/google`, `subsets: ["latin"]`, `display: "swap"`, variável `--font-inter`).
+- **Títulos:** Playfair Display — pesos **500, 600** (`next/font/google`, `subsets: ["latin"]`, `display: "swap"`, variável `--font-playfair`).
+- Integração via `@theme inline`: `--font-sans` → `--font-inter`; `--font-serif` → `--font-playfair`.
+- Estratégia explícita no `@layer base`: `h1, h2, h3 { @apply font-serif }` — **afeta todos os headings do site**, incluindo `/library` e `/blog` (registrado no plano da Entrega A).
+- `--font-mono` preservado (ver seção Fontes acima).
+
+### Contraste medido (Chromium, 2026-10-27)
+
+| Combinação | Medido |
 |---|---|
-| Vinho principal | `#3D1717` |
-| Marrom profundo | `#412726` |
-| Bege | `#EEE5DB` |
-| Off-white | `#FBF6F3` |
-| Taupe | `#9E8277` |
+| foreground/background | 11.84:1 |
+| primary-foreground/primary | 12.99:1 |
+| secondary-foreground/secondary | 10.35:1 |
+| muted-foreground/background | 5.69:1 |
+| muted-foreground/muted | 5.21:1 |
+| brand-soft-foreground/brand-soft | 10.35:1 |
+| input/background | 3.04:1 |
+| ring/background | 12.99:1 |
+| border/background | 1.41:1 |
 
-Direção tipográfica preliminar:
+- O taupe original (`#9E8277`) falharia como texto secundário sobre off-white; `--muted-foreground` foi **escurecido** para atingir 5.69:1.
+- `--input` precisou ser **escurecido** para atingir ≈3.04:1 contra o fundo (WCAG 1.4.11 — fronteira de campo interativo).
+- `--border` a 1.41:1 foi mantido para fins **decorativos**; elementos interativos relevantes devem usar contraste apropriado.
+- **Não se afirma conformidade WCAG integral de todos os componentes** — apenas os pares e fluxos medidos acima foram verificados.
 
-- **Títulos:** serifada elegante (ex.: Playfair Display ou Cormorant Garamond);
-- **Corpo:** sans-serif limpa (ex.: Inter).
+### Metadata implementada
 
-**Nenhuma fonte foi instalada e nenhum token foi alterado nesta fase.**
+- Título: `Maria Gabriella | Advocacia Personalizada`; descrição informativa sem promessas. Sem OAB/endereço inventados, sem OG com imagem inexistente.
 
-Direção geral: elegância, sobriedade, legibilidade, tipografia editorial, boa hierarquia visual, fotografia profissional, identidade coerente com o monograma existente, responsividade e acessibilidade.
+### Assets
 
-**Assets:** logotipo/monograma e fotografia profissional ainda **não estão no workspace** — precisarão ser disponibilizados (`PENDENTE_CONFIRMACAO_CLIENTE`).
+- Logotipo/monograma e fotografia profissional ainda **não estão no workspace** — `PENDENTE_CONFIRMACAO_CLIENTE`. Nenhum asset fictício foi criado.
 
 ## A EXPANDIR (tarefa técnica posterior)
 

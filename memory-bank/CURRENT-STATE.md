@@ -6,11 +6,18 @@ Snapshot curto do estado atual do repositório. Não copiar toda a documentaçã
 
 Projeto **independente** (landing page institucional da advogada Maria Gabriella), criado a partir do código do Svitordev UI Lab.
 
-- **Fase atual:** bootstrap documental concluído (2026-10-27). Landing em **planejamento** — nada implementado ainda.
-- **Código:** herdado do template, ainda **não personalizado** (rotas, `/library`, blog de demo, tokens roxos/Geist, dark padrão).
-- **Roadmap ativo:** `docs/ROADMAP-LANDING.md`. O roadmap das 1000 evoluções é histórico (origem UI Lab).
-- **Pendências:** dados da cliente (`PENDENTE_CONFIRMACAO_CLIENTE`), assets oficiais (logo/monograma, fotografia), identidade visual a aplicar.
-- **Próximo passo técnico recomendado:** sessão separada de planejamento da composição visual da landing (fase 2/3 do `docs/ROADMAP-LANDING.md`), usando os componentes existentes.
+- **Fase atual:** bootstrap documental concluído + **Design Foundation funcionalmente VERIFIED** (2026-10-27). Landing ainda em composição — Header/Hero da cliente pendentes.
+- **Tema claro aplicado** como padrão (classe `dark` removida do root; bloco `.dark` preservado, não adaptado; sem toggle).
+- **Identidade vinho/bege aplicada** nos tokens `:root` de `app/globals.css` (OKLCH calibrado; `--input` escurecido p/ ≈3.04:1).
+- **Fontes configuradas:** Inter (400/500/600, corpo) + Playfair Display (500/600, títulos h1–h3) via `next/font/google`, `display: swap`.
+- **Metadata institucional** aplicada no root layout.
+- **Header específico da cliente:** pendente. **Hero específica da cliente:** pendente.
+- **Assets oficiais:** pendentes (logotipo/monograma, fotografia — `PENDENTE_CONFIRMACAO_CLIENTE`).
+- **Dados profissionais:** pendentes de confirmação.
+- **Site ainda não pronto para publicação.**
+- **Roadmap ativo:** `docs/ROADMAP-LANDING.md` (fase 4 ✅; fases 2/3 seguem pendentes). O roadmap das 1000 evoluções é histórico (origem UI Lab).
+- **Gates da Entrega A:** lint 0/0 · build PASS (16 rotas) · Playwright 26 passed + 2 skipped · verificação visual 375×667 e 1280×720 em `/`, `/library/headers`, `/library/hero`, `/blog` — zero overflow.
+- **Próximo passo:** **Entrega B — Header + Hero** (plano aprovado em sessão própria; não iniciada).
 
 ### Estado herdado do UI Lab (histórico — descreve o código, ainda válido como estado técnico)
 

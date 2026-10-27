@@ -15,18 +15,30 @@ Roadmap **ativo** deste projeto. Sem estimativas de prazo (dados insuficientes).
 - Coletar/confirmar com a profissional: OAB (número/seccional), formação, títulos, anos de experiência, endereço, e-mail, telefone, região atendida, lista definitiva de áreas de atuação.
 - Definir política de conteúdo informativo e FAQ (somente conteúdo educativo, aprovado; depoimentos/estatísticas apenas com avaliação ética e autorização — ver `AGENTS.md`).
 - Enquanto não confirmado: manter marcação `PENDENTE_CONFIRMACAO_CLIENTE`.
+- **Status: pendente.**
 
 ## Fase 3 — Preparação dos assets
 
 - Receber assets oficiais: logotipo/monograma em formato web, fotografia profissional (hero e seção sobre), favicon/OG image.
 - Hoje o workspace tem apenas os SVGs padrão do template — nada da marca foi disponibilizado.
 - Otimizar formatos (WebP/AVIF/SVG) no momento da implementação.
+- **Status: pendente.**
 
-## Fase 4 — Identidade visual e tokens
+## Fase 4 — Identidade visual e tokens ✅ (Entrega A — VERIFIED 2026-10-27)
 
-- Validar a paleta proposta (estimativas visuais — ver `docs/DESIGN-SYSTEM.md`) e confirmar valores oficiais.
-- Aplicar tokens em `app/globals.css` (brand, cores semânticas, claro/escuro a decidir) e tipografia (títulos serifada editorial; corpo sans-serif) — decisão de fontes na sessão de implementação.
-- Decidir tema padrão da landing (provavelmente claro/off-white — a definir com a profissional).
+Implementado e validado (ver detalhes e contrastes medidos em `docs/DESIGN-SYSTEM.md`):
+
+- **Tema claro como padrão** — classe `dark` fixa removida do root layout; bloco `.dark` preservado (não adaptado); sem toggle/theme provider.
+- **Tokens aplicados** em `app/globals.css` (`:root`): paleta vinho/marrom/bege/off-white via OKLCH calibrado; `--input` ajustado por acessibilidade (≈3.04:1).
+- **Fontes implementadas** via `next/font/google`: Inter (400/500/600, corpo) + Playfair Display (500/600, títulos h1–h3 via `@layer base`); `display: swap`; sem dependência nova.
+- **Metadata institucional** aplicada no root layout.
+- **Contraste verificado** nos pares documentados; **responsividade validada** em 375×667 e 1280×720 (zero overflow).
+- **Gates:** lint 0/0 · build PASS (16 rotas) · Playwright 26 passed + 2 skipped.
+- Pendente da fase: validação **oficial** da paleta com a cliente (valores atuais são aproximações calibradas — fase 2).
+
+Arquivos funcionais afetados: `app/globals.css`, `app/layout.tsx`.
+
+**Próxima entrega técnica prevista: Entrega B — Header + Hero institucional (ainda não iniciada).**
 
 ## Fase 5 — Composição da landing com componentes existentes
 

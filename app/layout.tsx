@@ -1,11 +1,26 @@
 // app/layout.tsx
 import type { Metadata } from "next";
+import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["500", "600"],
+  variable: "--font-playfair",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "Starter Institucional + Blog",
+  title: "Maria Gabriella | Advocacia Personalizada",
   description:
-    "Template base de landing e blog em Next.js, Tailwind e shadcn/ui.",
+    "Informações sobre a atuação profissional e os serviços jurídicos apresentados por Maria Gabriella — Advocacia Personalizada.",
 };
 
 export default function RootLayout({
@@ -14,8 +29,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt-br" suppressHydrationWarning className="dark">
-      <body className="min-h-screen bg-background text-foreground antialiased">
+    <html lang="pt-br" suppressHydrationWarning>
+      <body className={`min-h-screen bg-background text-foreground antialiased ${inter.variable} ${playfair.variable}`}>
         {children}
       </body>
     </html>

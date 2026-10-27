@@ -10,7 +10,8 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-playfair);
   --font-mono: var(--font-geist-mono);
 
   --color-sidebar-ring: var(--sidebar-ring);
@@ -64,16 +65,16 @@
      ========================= */
 
   /* Cor principal da marca (usada em botões, links de destaque, etc.) */
-  --brand: oklch(0.55 0.20 280);                /* roxo médio */
+  --brand: oklch(0.302 0.09 27);                /* vinho — ≈ #3D1717 */
 
   /* Cor do texto em cima da cor principal (ex.: texto branco sobre botão roxo) */
-  --brand-foreground: oklch(0.98 0.01 280);     /* quase branco */
+  --brand-foreground: oklch(0.975 0.012 60);    /* off-white — ≈ #FBF6F3 */
 
   /* Versão mais suave da marca (fundos de seção, badges leves, hovers) */
-  --brand-soft: oklch(0.96 0.02 280);           /* roxo bem clarinho */
+  --brand-soft: oklch(0.93 0.022 60);           /* bege — ≈ #EEE5DB */
 
   /* Texto em cima do brand-soft, se usado em chips/badges */
-  --brand-soft-foreground: oklch(0.20 0.03 280);
+  --brand-soft-foreground: oklch(0.325 0.05 35); /* marrom profundo — ≈ #412726 */
 
   /* =========================
      CORES SEMÂNTICAS
@@ -82,34 +83,34 @@
      ========================= */
 
   /* Fundo geral da página (bg-background) */
-  --background: oklch(1 0 0);                   /* branco */
+  --background: oklch(0.975 0.012 60);          /* off-white — ≈ #FBF6F3 */
 
   /* Cor principal do texto (text-foreground) */
-  --foreground: oklch(0.145 0 0);               /* quase preto */
+  --foreground: oklch(0.325 0.05 35);           /* marrom profundo — ≈ #412726 */
 
   /* Fundo de cards (bg-card) */
-  --card: oklch(1 0 0);                         /* igual ao background */
+  --card: oklch(0.975 0.012 60);                /* igual ao background */
 
   /* Texto em cima dos cards (text-card-foreground) */
-  --card-foreground: oklch(0.145 0 0);
+  --card-foreground: oklch(0.325 0.05 35);
 
   /* Fundo de popovers/menus (bg-popover) */
-  --popover: oklch(1 0 0);
+  --popover: oklch(0.975 0.012 60);
 
   /* Texto de popovers (text-popover-foreground) */
-  --popover-foreground: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.325 0.05 35);
 
   /* Cor primária (bg-primary, text-primary) – ligada à marca */
   --primary: var(--brand);                      /* usa diretamente a cor da marca */
   --primary-foreground: var(--brand-foreground);
 
   /* Cor secundária (bg-secondary) – áreas de apoio, tags, chips */
-  --secondary: oklch(0.97 0 0);                 /* cinza bem clarinho */
-  --secondary-foreground: oklch(0.205 0 0);     /* texto escuro por cima */
+  --secondary: oklch(0.93 0.022 60);            /* bege — ≈ #EEE5DB */
+  --secondary-foreground: oklch(0.325 0.05 35); /* marrom profundo — ≈ #412726 */
 
   /* Fundo de elementos "muted" (bg-muted), ex.: caixas discretas, bordas suaves */
-  --muted: oklch(0.97 0 0);                     /* cinza clarinho */
-  --muted-foreground: oklch(0.556 0 0);         /* texto mais suave */
+  --muted: oklch(0.945 0.018 55);               /* neutro quente (bege clareado) */
+  --muted-foreground: oklch(0.50 0.05 45);      /* taupe escurecido — ≈ #9E8277 escurecido p/ AA */
 
   /* Cor de destaque/acento (bg-accent) – também ligada à marca suave */
   --accent: var(--brand-soft);
@@ -119,13 +120,13 @@
   --destructive: oklch(0.577 0.245 27.325);
 
   /* Cor padrão de borda (border-border) */
-  --border: oklch(0.922 0 0);
+  --border: oklch(0.865 0.03 55);               /* neutro quente discreto (taupe clareado) */
 
-  /* Fundo de inputs (bg-input) */
-  --input: oklch(0.922 0 0);
+  /* Fundo de inputs (bg-input) — taupe: fronteira de campo interativo precisa de >=3:1 (WCAG 1.4.11) */
+  --input: oklch(0.65 0.05 50);
 
   /* Cor do anel de foco (outline-ring) e focus-visible */
-  --ring: oklch(0.708 0 0);
+  --ring: oklch(0.302 0.09 27);                 /* vinho — igual ao brand */
 
   /* Cores de gráficos (chart-1...5) – usadas em dashboards */
   --chart-1: oklch(0.646 0.222 41.116);
@@ -135,14 +136,14 @@
   --chart-5: oklch(0.769 0.188 70.08);
 
   /* Cores para sidebars (se você tiver layout com menu lateral) */
-  --sidebar: oklch(0.985 0 0);                  /* fundo do sidebar */
-  --sidebar-foreground: oklch(0.145 0 0);       /* texto no sidebar */
+  --sidebar: oklch(0.945 0.018 55);             /* neutro quente (coerência com muted) */
+  --sidebar-foreground: oklch(0.325 0.05 35);   /* texto no sidebar */
   --sidebar-primary: var(--brand);              /* cor principal no sidebar */
   --sidebar-primary-foreground: var(--brand-foreground);
   --sidebar-accent: var(--brand-soft);          /* hover/seleção no sidebar */
   --sidebar-accent-foreground: var(--brand-soft-foreground);
-  --sidebar-border: oklch(0.922 0 0);           /* bordas do sidebar */
-  --sidebar-ring: oklch(0.708 0 0);             /* foco no sidebar */
+  --sidebar-border: oklch(0.865 0.03 55);       /* bordas do sidebar */
+  --sidebar-ring: oklch(0.302 0.09 27);         /* foco no sidebar */
 }
 
 /* =========================
@@ -226,6 +227,17 @@
 
   body {
     /* Garante que body já use background/texto do tema atual */
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+  }
+
+  /*
+   * Estratégia explícita da identidade: títulos institucionais usam a serifada
+   * (Playfair Display via --font-serif). Afeta TODOS os headings do site,
+   * incluindo /library e /blog — registrado no plano da Entrega A.
+   */
+  h1,
+  h2,
+  h3 {
+    @apply font-serif;
   }
 }
