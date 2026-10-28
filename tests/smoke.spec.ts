@@ -235,3 +235,49 @@ test('secao sobre e textual sem placeholder de imagem', async ({ page }) => {
   await expect(sobre.getByRole('link')).toHaveCount(0);
   await expect(sobre.getByRole('button')).toHaveCount(0);
 });
+
+test('contact details na library renderiza canais com e sem link sem formulario', async ({ page }) => {
+  await page.goto('/library/contact');
+
+  const section = page
+    .locator('section')
+    .filter({ has: page.getByRole('heading', { level: 2, name: 'Canais de contato' }) });
+
+  await expect(section.getByRole('heading', { level: 2, name: 'Canais de contato' })).toBeVisible();
+
+  // Canais com destino de demonstração válido.
+  await expect(section.getByRole('link', { name: 'contato@suaempresa.com' })).toHaveAttribute(
+    'href',
+    'mailto:contato@suaempresa.com',
+  );
+  await expect(section.getByRole('link', { name: 'www.suaempresa.com' })).toHaveAttribute(
+    'href',
+    'https://www.suaempresa.com',
+  );
+
+  // Canal sem href e exibido como texto, nao como link.
+  await expect(section.getByRole('link', { name: '(00) 00000-0000' })).toHaveCount(0);
+  await expect(section.getByText('(00) 00000-0000')).toBeVisible();
+
+  // Sem anchors vazios e sem semântica de formulário no componente migrado.
+  await expect(section.locator('a[href=""]')).toHaveCount(0);
+  await expect(section.locator('form')).toHaveCount(0);
+});
+
+test('home nao renderiza secao de contato e preserva navegacao real', async ({ page }, testInfo) => {
+  await page.goto('/');
+
+  // Contato institucional ainda sem dados oficiais — nada é publicado.
+  await expect(page.locator('#contato')).toHaveCount(0);
+  await expect(page.locator('main form')).toHaveCount(0);
+  await expect(page.getByRole('button', { name: /contato/i })).toHaveCount(0);
+
+  const banner = page.getByRole('banner');
+  if (testInfo.project.name === 'mobile') {
+    await banner.getByRole('button', { name: 'Abrir menu' }).click();
+  }
+
+  await expect(banner.getByRole('link', { name: 'Início' })).toHaveAttribute('href', '/');
+  await expect(banner.getByRole('link', { name: 'Áreas de atuação' })).toHaveAttribute('href', '/#areas-de-atuacao');
+  await expect(banner.getByRole('link', { name: 'Sobre' })).toHaveAttribute('href', '/#sobre');
+});

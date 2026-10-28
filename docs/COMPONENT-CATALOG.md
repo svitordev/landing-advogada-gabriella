@@ -92,7 +92,7 @@
 
 | Nome | Path | Status | Observações |
 |---|---|---|---|
-| ContactDetails | `components/sections/contact/contact-details.tsx` | Template | Detalhes + form |
+| ContactDetails | `components/sections/contact/contact-details.tsx` | Pronto | **Data-driven (Entrega D, 2026-10-28) — `LAB_CANDIDATE`.** Contrato `ContactChannel`/`ContactDetailsProps` (tipos locais): `title` obrigatório; `id?`/`eyebrow?`/`description?`/`channels?` opcionais. `channels` ausente/vazio → a seção não é renderizada; `href` válido (protocolos aceitos por validação local: `mailto:`, `tel:`, `http(s)://`, caminho `/`) → link sublinhado; sem `href` → texto simples; links vazios nunca são gerados; `hint` opcional. Server Component; sem formulário; sem captura de dados; nenhum conteúdo da cliente hardcoded; `ul[role=list]` responsivo (1/2/3 colunas); demonstração na `/library/contact` com dados fictícios |
 | ContactSimple | `components/sections/contact/contact-simple.tsx` | Template | Form simples |
 | ContactSplit | `components/sections/contact/contact-split.tsx` | Template | Dividido |
 
@@ -146,4 +146,6 @@ Mapeamento apenas indicativo, para a composição futura (ver `docs/ROADMAP-LAND
 
 - Componentes `ui/` são base e sem conteúdo hardcoded (prontos para reutilização direta).
 - Componentes `site/` e `sections/` são **templates** — estrutura reutilizável, mas com conteúdo hardcoded que deve ser substituído por dados do projeto.
+- **Formulários:** o formulário inerte foi removido **somente** do `ContactDetails` (Entrega D). `ContactSimple` e `ContactSplit` permanecem templates com formulários demonstrativos, ainda sem envio funcional — o problema global de formulários não está resolvido.
+- **Classificação (convenção DEC-011):** `ContactDetails` → `LAB_CANDIDATE`; dados específicos da advogada → `PROJECT_ONLY` (`lib/site-config.ts`). Nenhum componente `LAB_PROMOTED`.
 - Catálogo vivo (preview visual) = `/library`.

@@ -64,7 +64,17 @@ Arquivos funcionais afetados: `app/globals.css`, `app/layout.tsx`.
 - Gates: lint 0/0 · build PASS (16 rotas) · Playwright 32 passed + 2 skipped (17 casos × 2 projetos) · zero overflow em 375×667, 768×1024 e 1280×720.
 - A landing inteira ainda **não** está pronta — demais seções da fase seguem pendentes.
 
-**Próxima entrega funcional sugerida: Entrega D — Informações de atendimento + Contato institucional (não iniciada; recursos de contato dependem dos dados oficiais).**
+### Entrega D — ContactDetails Data-Driven — implementação funcional VERIFIED (2026-10-28)
+
+- `ContactDetails` migrado para contrato data-driven (`ContactChannel`/`ContactDetailsProps`; `title` obrigatório; `id?`/`eyebrow?`/`description?`/`channels?` opcionais); Server Component preservado; nenhum conteúdo da cliente hardcoded.
+- Canais opcionais: `channels` ausente/vazio → seção não renderizada; `href` válido → link; sem `href` → texto simples; protocolos aceitos pelo código: `mailto:`, `tel:`, `http(s)://`, caminho `/`; links vazios nunca são gerados; `hint` opcional.
+- Formulário inerte removido do componente migrado (somente `ContactDetails`); `ContactSimple`/`ContactSplit` intocados.
+- Demonstração da `/library/contact` atualizada com dados fictícios cobrindo os três casos do contrato (mailto, sem href, HTTPS).
+- Acessibilidade: `ul[role=list]`, links reais, foco visível por teclado confirmado. Responsividade: 375×667 (1 coluna), 768×1024 (2 colunas), 1280×720 (3 colunas) — zero overflow.
+- Gates: lint 0/0 · build PASS (16 rotas) · Playwright 36 passed + 2 skipped (19 casos × 2 projetos) · `git diff --check` limpo.
+- IMPORTANTE: a fase de Atendimento/Contato público **não** está concluída — a entrega preparou o componente reutilizável, mas não publicou contato institucional da advogada; a região de atendimento permanece pendente de validação e os canais oficiais seguem pendentes (fase 2).
+
+**Próxima evolução sugerida: FAQ / conteúdo informativo, mediante planejamento específico (não iniciada). Contato institucional depende dos dados oficiais (fase 2).**
 
 ## Fase 6 — Criação de componentes realmente necessários
 

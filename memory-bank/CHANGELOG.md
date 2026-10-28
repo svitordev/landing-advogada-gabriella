@@ -4,6 +4,21 @@ Registro de mudanças importantes ao longo da evolução. Formato inspirado em K
 
 ---
 
+## [2026-10-28] — Entrega D: ContactDetails Data-Driven (VERIFIED)
+
+- `ContactDetails` migrado para contrato data-driven (`ContactChannel`/`ContactDetailsProps` — tipos locais; `title` obrigatório; `id?`/`eyebrow?`/`description?`/`channels?` opcionais); Server Component; nenhum conteúdo da cliente hardcoded.
+- Canais opcionais: `channels` ausente/vazio → seção não renderizada; `href` válido → link sublinhado; sem `href` → texto simples; protocolos suportados por validação local: `mailto:`, `tel:`, `http(s)://`, caminho `/`; links vazios nunca são gerados; `hint` opcional.
+- Formulário inerte removido **somente** do `ContactDetails` — o componente passa a ser só canais, sem captura de dados. `ContactSimple` e `ContactSplit` permanecem templates com formulários demonstrativos sem envio funcional (problema global não resolvido).
+- Demonstração da `/library/contact` atualizada com dados fictícios cobrindo os três casos do contrato (mailto, sem href, HTTPS).
+- Home preservada: nenhuma seção de contato publicada (dados oficiais pendentes); navegação Início/Áreas/Sobre intacta; nenhum CTA de contato inventado.
+- Acessibilidade: `ul[role=list]`, links reais, foco visível por teclado confirmado. Responsividade: 375×667 (1 coluna), 768×1024 (2 colunas), 1280×720 (3 colunas) — zero overflow.
+- Testes: 2 novos Playwright (canais com/sem link sem formulário na library; home sem seção de contato com navegação preservada). Suíte: 19 casos × 2 projetos = 38 execuções — **36 passed + 2 skipped**.
+- Gates: lint **0/0** · build **PASS** (16 rotas) · `git diff --check` limpo.
+- **Nenhuma dependência nova; nenhum componente React novo criado** (migração de componente existente; contagem do catálogo preservada em 41). Classificação: `ContactDetails` → `LAB_CANDIDATE`; dados da advogada → `PROJECT_ONLY`.
+- Documentação atualizada: `docs/COMPONENT-CATALOG.md`, `docs/ROADMAP-LANDING.md`, `memory-bank/CURRENT-STATE.md`, `memory-bank/CHANGELOG.md`.
+
+---
+
 ## [2026-10-28] — Entrega C: Áreas de Atuação + Sobre (VERIFIED)
 
 - `ServicesGridSimple` migrado para contrato data-driven (`ServiceItem`; `title`/`items` obrigatórios; `id?`/`eyebrow?`/`description?`): seis cards puramente informativos (h2/h3, sem links/botões falsos), `items` vazio sem grade, grid 1/3 colunas preservado, Server Component.
