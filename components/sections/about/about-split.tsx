@@ -1,48 +1,67 @@
 // components/sections/about/about-split.tsx
-const qualities = [
-  "Linguagem clara, sem termos técnicos desnecessários.",
-  "Atendimento próximo, com foco em entender a realidade de cada cliente.",
-  "Transparência em prazos, escopo e investimentos.",
-];
+import Image from "next/image";
 
-export function AboutSplit() {
+export type AboutSplitProps = {
+  id?: string;
+  eyebrow?: string;
+  title: string;
+  description?: string;
+  paragraphs?: string[];
+  points?: string[];
+  image?: {
+    src: string;
+    alt: string;
+  };
+};
+
+export function AboutSplit({ id, eyebrow, title, description, paragraphs, points, image }: AboutSplitProps) {
+  // Coluna direita: imagem real > lista de pontos > nada (coluna textual única, sem placeholder).
+  const hasSideColumn = Boolean(image || (points && points.length > 0));
+
   return (
-    <section className="w-full bg-muted/30">
+    <section id={id} className="w-full bg-muted/30">
       <div className="mx-auto max-w-6xl px-4 py-12 md:py-16">
-        <div className="grid gap-10 md:grid-cols-2 md:items-start">
-          {/* Coluna sobre */}
+        <div className={hasSideColumn ? "grid gap-10 md:grid-cols-2 md:items-start" : "max-w-3xl space-y-4"}>
+          {/* Coluna editorial */}
           <div className="space-y-4">
-            <h2 className="text-xl font-semibold tracking-tight md:text-2xl">
-              Uma equipe focada em resolver necessidades reais dos clientes
-            </h2>
-            <p className="text-sm text-muted-foreground">
-              Antes de falar em soluções, buscamos entender o que está dificultando o dia a dia:
-              retrabalho, informações dispersas, falhas de comunicação ou processos manuais demais.
-            </p>
-            <p className="text-sm text-muted-foreground">
-              A partir desse diagnóstico, são definidos caminhos simples e sustentáveis, alinhados
-              com a forma como o seu negócio funciona e com o resultado que você espera atingir.
-            </p>
+            {eyebrow && (
+              <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                {eyebrow}
+              </p>
+            )}
+            <h2 className="text-xl font-semibold tracking-tight md:text-2xl">{title}</h2>
+            {description && <p className="text-sm text-muted-foreground">{description}</p>}
+            {paragraphs?.map((paragraph) => (
+              <p key={paragraph} className="text-sm text-muted-foreground">
+                {paragraph}
+              </p>
+            ))}
           </div>
 
-          {/* Coluna "como é trabalhar conosco" */}
-          <div className="space-y-3 rounded-2xl border bg-background p-4 text-sm shadow-sm">
-            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-              Como é trabalhar conosco
-            </p>
-            <ul className="space-y-2 text-xs text-muted-foreground">
-              {qualities.map((item) => (
-                <li key={item} className="flex gap-2">
-                  <span className="mt-[5px] h-1.5 w-1.5 shrink-0 rounded-full bg-foreground" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-            <p className="pt-2 text-[11px] text-muted-foreground">
-              Esse bloco pode ser usado para apresentar a forma de atuação de escritórios,
-              clínicas, consultorias e empresas de serviços em geral.
-            </p>
-          </div>
+          {/* Coluna direita — imagem real (next/image) > lista de pontos > nada */}
+          {image && (
+            <div className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-2xl border bg-muted">
+              <Image
+                src={image.src}
+                alt={image.alt}
+                fill
+                sizes="(min-width: 768px) 50vw, 100vw"
+                className="object-cover"
+              />
+            </div>
+          )}
+          {!image && points && points.length > 0 && (
+            <div className="space-y-3 rounded-2xl border bg-background p-4 text-sm shadow-sm">
+              <ul className="space-y-2 text-xs text-muted-foreground">
+                {points.map((point) => (
+                  <li key={point} className="flex gap-2">
+                    <span className="mt-[5px] h-1.5 w-1.5 shrink-0 rounded-full bg-foreground" />
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     </section>

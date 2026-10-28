@@ -4,6 +4,22 @@ Registro de mudanças importantes ao longo da evolução. Formato inspirado em K
 
 ---
 
+## [2026-10-28] — Entrega C: Áreas de Atuação + Sobre (VERIFIED)
+
+- `ServicesGridSimple` migrado para contrato data-driven (`ServiceItem`; `title`/`items` obrigatórios; `id?`/`eyebrow?`/`description?`): seis cards puramente informativos (h2/h3, sem links/botões falsos), `items` vazio sem grade, grid 1/3 colunas preservado, Server Component.
+- `AboutSplit` migrado para contrato data-driven (`title` obrigatório; `id?`/`eyebrow?`/`description?`/`paragraphs?`/`points?`/`image?`): coluna direita com prioridade imagem (`next/image`) > lista > nada; a landing usa o caso textual (sem fotografia oficial); suporte a imagem implementado, não validado com asset real; Server Component.
+- `lib/site-config.ts` (PROJECT_ONLY) ganhou `sitePracticeAreas` (seis atividades preliminares com descrições neutras) e `siteAbout` (copy institucional provisória) — `PENDENTE_CONFIRMACAO_CLIENTE` apenas em comentários; nada inventado (sem formação/OAB/experiência declaradas).
+- Navegação pública atualizada: Início `/` · Áreas de atuação `/#areas-de-atuacao` · Sobre `/#sobre` (IDs conferidos com as sections); "Conteúdo" saiu da nav pública — rota `/blog` e artigos genéricos preservados.
+- `HeaderBasic`: correção mínima de active state — links com hash não são destacados apenas pelo pathname (sem scroll spy); `MobileNav` intacto.
+- Home passou a compor Hero → Áreas de atuação → Sobre (header/footer do layout; h1 único; sem CTA falso; footer não duplicado).
+- Demos da `/library` (`/library/services`, `/library/about`) adaptadas para receber props com dados genéricos — visual do baseline preservado; demais grupos intocados.
+- Testes: 2 existentes ajustados (navegação home → âncora `#areas-de-atuacao` com seção visível; links reais da home) + 2 novos (seis áreas + hierarquia de títulos; Sobre textual sem placeholder de imagem). Suíte: 17 casos × 2 projetos = 34 execuções — **32 passed + 2 skipped**.
+- Responsividade validada em 375×667 (1 coluna), 768×1024 e 1280×720 (3 colunas) — zero overflow; breakpoint original preservado (validação não identificou problema).
+- Gates: lint **0/0** · build **PASS** (16 rotas) · `git diff --check` limpo.
+- **Nenhuma dependência nova; nenhum componente novo criado** (migrações de componentes existentes; contagem do catálogo preservada em 41).
+
+---
+
 ## [2026-10-27] — Entrega B: Header + Hero institucional (VERIFIED)
 
 - `HeaderBasic` migrado para contrato data-driven (`brand`/`links`/`action?`): marca tipográfica da cliente via props (logo oficial pendente), CTA condicional (CTA ausente → sem botão falso), links internos/externos conforme contrato, `MobileNav` e navegação por teclado preservados.

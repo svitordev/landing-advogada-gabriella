@@ -60,14 +60,14 @@
 | Nome | Path | Status | Observações |
 |---|---|---|---|
 | AboutSimple | `components/sections/about/about-simple.tsx` | Template | Layout simples |
-| AboutSplit | `components/sections/about/about-split.tsx` | Template | Layout dividido |
+| AboutSplit | `components/sections/about/about-split.tsx` | Pronto | **Data-driven (Entrega C, 2026-10-28).** Contrato `AboutSplitProps`: `title` obrigatório; `id?`, `eyebrow?`, `description?`, `paragraphs?`, `points?`, `image?` (`{ src, alt }`) opcionais. Coluna direita com prioridade: imagem real (`next/image`, `alt` pelo contrato) > lista de pontos > nada (coluna textual única, sem placeholder/moldura falsa); blocos opcionais ausentes não geram espaço vazio; `id` aplicado à section real (âncoras); Server Component; consumido pela home via `lib/site-config.ts` (sem fotografia ainda — modalidade com imagem implementada, não validada com asset oficial); demo na `/library/about` adaptada para receber props (dados genéricos, caso com lista) |
 | AboutTimeline | `components/sections/about/about-timeline.tsx` | Template | Timeline |
 
 ### Services — `components/sections/services/` (3)
 
 | Nome | Path | Status | Observações |
 |---|---|---|---|
-| ServicesGridSimple | `components/sections/services/services-grid-simple.tsx` | Template | Grade simples |
+| ServicesGridSimple | `components/sections/services/services-grid-simple.tsx` | Pronto | **Data-driven (Entrega C, 2026-10-28).** Contrato `ServiceItem`/`ServicesGridSimpleProps`: `title` e `items` obrigatórios; `id?`, `eyebrow?`, `description?` opcionais. Cards puramente informativos (h2 na seção, h3 nos cards, sem links/botões falsos); `items` vazio → sem grade; `key` estável; grid 1 coluna mobile / 3 desktop (breakpoint original preservado — validado sem overflow em 768px); `id` aplicado à section real (âncoras); Server Component; consumido pela home via `lib/site-config.ts`; demo na `/library/services` adaptada para receber props (dados genéricos) |
 | ServicesSplitWithHighlight | `components/sections/services/services-split-with-highlight.tsx` | Template | Dividido com destaque |
 | ServicesWithIcons | `components/sections/services/services-with-icons.tsx` | Template | Com ícones |
 

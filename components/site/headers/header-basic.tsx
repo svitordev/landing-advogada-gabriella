@@ -49,7 +49,10 @@ export function HeaderBasic({ brand, links, action }: HeaderBasicProps) {
         >
           {links.map((item) => {
             const baseHref = item.href.split("#")[0] || "/";
-            const isActive = baseHref === "/" ? pathname === "/" : pathname === baseHref;
+            // Links com âncora não recebem destaque: usePathname() não considera o
+            // fragmento e todos os anchors da home compartilhariam o pathname "/".
+            const isActive =
+              !item.href.includes("#") && (baseHref === "/" ? pathname === "/" : pathname === baseHref);
 
             return (
               <Link

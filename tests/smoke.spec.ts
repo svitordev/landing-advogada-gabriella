@@ -58,7 +58,7 @@ test('library footers exibe a categoria com previews', async ({ page }) => {
   await expect(page.getByRole('heading', { level: 2 }).first()).toBeVisible();
 });
 
-test('navegacao home -> blog pelo header', async ({ page }, testInfo) => {
+test('navegacao home -> areas de atuacao pelo header', async ({ page }, testInfo) => {
   await page.goto('/');
 
   const banner = page.getByRole('banner');
@@ -66,9 +66,13 @@ test('navegacao home -> blog pelo header', async ({ page }, testInfo) => {
     await banner.getByRole('button', { name: 'Abrir menu' }).click();
   }
 
-  await banner.getByRole('link', { name: 'Conteúdo', exact: true }).click();
+  await banner.getByRole('link', { name: 'Áreas de atuação', exact: true }).click();
 
-  await expect(page).toHaveURL(/\/blog$/);
+  await expect(page).toHaveURL(/#areas-de-atuacao$/);
+
+  // A URL sozinha nao prova acessibilidade — a secao-alvo precisa estar visivel.
+  const areas = page.locator('#areas-de-atuacao');
+  await expect(areas.getByRole('heading', { level: 2, name: 'Áreas de atuação' })).toBeVisible();
 });
 
 test('home exibe marca institucional, H1 da hero e apenas links com destino real', async ({ page }, testInfo) => {
@@ -88,7 +92,8 @@ test('home exibe marca institucional, H1 da hero e apenas links com destino real
   }
 
   await expect(banner.getByRole('link', { name: 'Início' })).toHaveAttribute('href', '/');
-  await expect(banner.getByRole('link', { name: 'Conteúdo' })).toHaveAttribute('href', '/blog');
+  await expect(banner.getByRole('link', { name: 'Áreas de atuação' })).toHaveAttribute('href', '/#areas-de-atuacao');
+  await expect(banner.getByRole('link', { name: 'Sobre' })).toHaveAttribute('href', '/#sobre');
 
   // CTA de contato ainda sem destino oficial — nenhum botão de contato deve ser renderizado
   await expect(banner.getByRole('button', { name: 'Entrar em contato' })).toHaveCount(0);
@@ -202,4 +207,31 @@ test('hero centralizada data-driven renderiza heading e CTAs como links reais', 
     'href',
     '/blog',
   );
+});
+
+test('home exibe as seis areas de atuacao com hierarquia de titulos', async ({ page }) => {
+  await page.goto('/');
+
+  await expect(page.getByRole('heading', { level: 1 })).toHaveCount(1);
+
+  const areas = page.locator('#areas-de-atuacao');
+  await expect(areas.getByRole('heading', { level: 2, name: 'Áreas de atuação' })).toBeVisible();
+  await expect(areas.getByRole('heading', { level: 3 })).toHaveCount(6);
+  await expect(areas.getByRole('heading', { level: 3, name: 'Inventário e partilha' })).toBeVisible();
+  await expect(areas.getByRole('heading', { level: 3, name: 'Divórcio extrajudicial' })).toBeVisible();
+
+  await expect(page.locator('#sobre').getByRole('heading', { level: 2, name: 'Sobre a advogada' })).toBeVisible();
+});
+
+test('secao sobre e textual sem placeholder de imagem', async ({ page }) => {
+  await page.goto('/');
+
+  const sobre = page.locator('#sobre');
+  await expect(sobre.getByRole('heading', { level: 2, name: 'Sobre a advogada' })).toBeVisible();
+  await expect(sobre.getByText('Atendimento próximo e individualizado')).toBeVisible();
+
+  // Sem fotografia oficial ainda — nada de img, placeholder ou elemento falsamente interativo.
+  await expect(sobre.locator('img')).toHaveCount(0);
+  await expect(sobre.getByRole('link')).toHaveCount(0);
+  await expect(sobre.getByRole('button')).toHaveCount(0);
 });

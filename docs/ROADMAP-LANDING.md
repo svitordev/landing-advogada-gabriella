@@ -53,9 +53,18 @@ Arquivos funcionais afetados: `app/globals.css`, `app/layout.tsx`.
 - Home institucional inicial: apenas a hero da cliente; seções genéricas de demo deixaram de ser renderizadas na home (componentes seguem no catálogo); `FooterCta` saiu da composição pública; rodapé mínimo institucional.
 - Demos da `/library` preservadas, adaptadas para receber props com dados genéricos.
 - Gates: lint 0/0 · build PASS (16 rotas) · Playwright 28 passed + 2 skipped (15 casos × 2 projetos) · zero overflow em 375×667 e 1280×720.
+
+### Entrega C — Áreas de Atuação + Sobre a Advogada — implementação funcional VERIFIED (2026-10-28)
+
+- `ServicesGridSimple` migrado para contrato data-driven (`title`/`items` obrigatórios; `id?`/`eyebrow?`/`description?`), com seis cards informativos (h2/h3, sem links falsos); grid 1/3 colunas preservado.
+- `AboutSplit` migrado para contrato data-driven (`title` obrigatório; `id?`/`eyebrow?`/`description?`/`paragraphs?`/`points?`/`image?`); coluna direita: imagem > lista > nada; a landing usa o caso textual (sem fotografia oficial); suporte a `next/image` implementado, não validado com asset real.
+- `lib/site-config.ts` (PROJECT_ONLY) passou a fornecer `sitePracticeAreas` (seis atividades preliminares, copy provisória — `PENDENTE_CONFIRMACAO_CLIENTE`) e `siteAbout` (copy institucional provisória, sem formação/OAB/experiência declaradas).
+- Navegação pública com âncoras reais: Início `/` · Áreas de atuação `/#areas-de-atuacao` · Sobre `/#sobre`; `HeaderBasic` recebeu correção mínima para não destacar links com hash pelo pathname (sem scroll spy); `MobileNav` intacto; "Conteúdo" saiu da nav pública (rota `/blog` e artigos genéricos preservados — pendência de publicação).
+- Demos da `/library` adaptadas para props com dados genéricos; demais grupos intocados.
+- Gates: lint 0/0 · build PASS (16 rotas) · Playwright 32 passed + 2 skipped (17 casos × 2 projetos) · zero overflow em 375×667, 768×1024 e 1280×720.
 - A landing inteira ainda **não** está pronta — demais seções da fase seguem pendentes.
 
-**Próxima entrega funcional sugerida: Entrega C — Áreas de atuação + Sobre a advogada (não iniciada).**
+**Próxima entrega funcional sugerida: Entrega D — Informações de atendimento + Contato institucional (não iniciada; recursos de contato dependem dos dados oficiais).**
 
 ## Fase 6 — Criação de componentes realmente necessários
 

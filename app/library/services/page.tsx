@@ -1,7 +1,34 @@
 // app/sections/services/page.tsx
-import { ServicesGridSimple } from "@/components/sections/services/services-grid-simple";
+import {
+  ServicesGridSimple,
+  type ServicesGridSimpleProps,
+} from "@/components/sections/services/services-grid-simple";
 import { ServicesWithIcons } from "@/components/sections/services/services-with-icons";
 import { ServicesSplitWithHighlight } from "@/components/sections/services/services-split-with-highlight";
+
+// Demo genérica da variante data-driven — mesma copy do baseline visual.
+const servicesGridSimpleDemo: ServicesGridSimpleProps = {
+  title: "Como sua empresa ajuda os clientes",
+  description:
+    "Uma visão geral dos principais serviços, deixando claro o que o cliente pode esperar ao escolher o seu atendimento.",
+  items: [
+    {
+      title: "Serviços principais",
+      description:
+        "Destaque os serviços que são o centro do seu trabalho, explicando de forma simples o que cada um resolve.",
+    },
+    {
+      title: "Atendimento personalizado",
+      description:
+        "Mostre como o atendimento é adaptado à realidade de cada cliente, reforçando proximidade, confiança e clareza.",
+    },
+    {
+      title: "Suporte e acompanhamento",
+      description:
+        "Explique como funciona o acompanhamento após a contratação: canais de contato, horários e tipo de suporte oferecido.",
+    },
+  ],
+};
 
 export default function ServicesSectionsPage() {
   return (
@@ -12,7 +39,7 @@ export default function ServicesSectionsPage() {
             Variação 01 · Grid simples
           </p>
           <div className="overflow-hidden rounded-2xl border bg-background shadow-sm">
-            <ServicesGridSimple />
+            <ServicesGridSimple {...servicesGridSimpleDemo} />
           </div>
         </div>
       </section>

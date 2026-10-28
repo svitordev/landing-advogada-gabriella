@@ -6,11 +6,12 @@ Snapshot curto do estado atual do repositório. Não copiar toda a documentaçã
 
 Projeto **independente** (landing page institucional da advogada Maria Gabriella), criado a partir do código do Svitordev UI Lab.
 
-- **Fase atual:** bootstrap documental concluído + Design Foundation VERIFIED + **Entrega B (Header + Hero institucional) funcionalmente VERIFIED** (2026-10-27). Landing ainda em composição — demais seções pendentes.
-- **Header institucional na home:** `HeaderBasic` data-driven consumindo `lib/site-config.ts`. **Hero institucional na home:** `HeroPrimary` data-driven — conteúdo provisório (`PENDENTE_CONFIRMACAO_CLIENTE`).
-- **Configuração da cliente:** centralizada em `lib/site-config.ts` (PROJECT_ONLY — configuração, não componente React).
-- **Sem logo oficial** (marca tipográfica) e **sem fotografia oficial** (hero usa fallback neutro). **Sem contatos oficiais confirmados** — CTA de contato omitido.
-- **A rota `/blog` ainda contém artigos genéricos herdados do template e está acessível pela navegação pública "Conteúdo"** — pendência antes do deploy (substituir ou retirar antes da publicação).
+- **Fase atual:** bootstrap documental concluído + Design Foundation VERIFIED + Entrega B VERIFIED + **Entrega C (Áreas de Atuação + Sobre) funcionalmente VERIFIED** (2026-10-28). Landing ainda em composição — demais seções pendentes.
+- **Home atual:** Header institucional → Hero → Áreas de atuação (6 cards) → Sobre → footer mínimo — tudo data-driven via `lib/site-config.ts` (PROJECT_ONLY — configuração, não componente React).
+- **Seis áreas de atuação preliminares** com copy descritiva provisória; **Sobre a advogada** com copy institucional provisória — ambos `PENDENTE_CONFIRMACAO_CLIENTE` (marcação só no código, nunca na interface).
+- **Navegação pública por âncoras reais:** Início `/` · Áreas de atuação `/#areas-de-atuacao` · Sobre `/#sobre`; active state não destaca links com hash (ajuste mínimo no `header-basic`); `MobileNav` intacto; sem scroll spy.
+- **"Conteúdo" saiu da navegação pública.** A rota `/blog` continua existindo com artigos genéricos herdados do template — pendência antes do deploy (substituir ou despublicar).
+- **Sem logo oficial** (marca tipográfica) e **sem fotografia oficial** (hero usa fallback neutro; About renderiza somente texto — o suporte a imagem do `AboutSplit` está implementado, mas não foi validado com a fotografia real). **Sem contatos oficiais confirmados** — CTA de contato omitido.
 - **Tema claro aplicado** como padrão (classe `dark` removida do root; bloco `.dark` preservado, não adaptado; sem toggle).
 - **Identidade vinho/bege aplicada** nos tokens `:root` de `app/globals.css` (OKLCH calibrado; `--input` escurecido p/ ≈3.04:1).
 - **Fontes configuradas:** Inter (400/500/600, corpo) + Playfair Display (500/600, títulos h1–h3) via `next/font/google`, `display: swap`.
@@ -18,9 +19,9 @@ Projeto **independente** (landing page institucional da advogada Maria Gabriella
 - **Assets oficiais:** pendentes (logotipo/monograma, fotografia — `PENDENTE_CONFIRMACAO_CLIENTE`). O fluxo de imagem do `HeroPrimary` com arquivo real não foi validado por ausência do asset.
 - **Dados profissionais:** pendentes de confirmação (incl. inscrição OAB).
 - **Site ainda não pronto para publicação.**
-- **Roadmap ativo:** `docs/ROADMAP-LANDING.md` (fases 1 e 4 ✅; fase 5 parcialmente executada — Entrega B VERIFIED; fases 2/3 seguem pendentes). O roadmap das 1000 evoluções é histórico (origem UI Lab).
-- **Gates da Entrega B:** lint 0/0 · build PASS (16 rotas) · Playwright 28 passed + 2 skipped (15 casos × 2 projetos) · verificação visual 375×667 e 1280×720 em `/`, `/library/headers`, `/library/hero` — zero overflow.
-- **Próximo passo:** **Entrega C — Áreas de atuação + Sobre a advogada** (sugerida; não iniciada).
+- **Roadmap ativo:** `docs/ROADMAP-LANDING.md` (fases 1 e 4 ✅; fase 5 parcialmente executada — Entregas B e C VERIFIED; fases 2/3 seguem pendentes). O roadmap das 1000 evoluções é histórico (origem UI Lab).
+- **Gates da Entrega C:** lint 0/0 · build PASS (16 rotas) · Playwright 32 passed + 2 skipped (17 casos × 2 projetos) · verificação visual 375×667, 768×1024 e 1280×720 em `/`, `/library/services`, `/library/about` — zero overflow (breakpoint do grid preservado: 1 coluna mobile / 3 desktop).
+- **Próximo passo:** **Entrega D — Informações de atendimento + Contato institucional** (sugerida; não iniciada — recursos de contato dependem dos dados oficiais).
 
 ### Estado herdado do UI Lab (histórico — descreve o código, ainda válido como estado técnico)
 
@@ -79,7 +80,7 @@ Showcase oficial. Estrutura `app/library/[categoria]/page.tsx` renderiza cada va
 
 Production build **verde** (PASS). Lint atual: **0 errors / 0 warnings**. Rota `/blog/[slug]` funcional.
 
-- **Playwright mínimo:** ✅ **VERIFIED** — `@playwright/test` 1.64.1, **Chromium** somente; projects desktop **1280×720** e mobile **375×667**; **15 smoke tests / 30 execuções** (28 passed + 2 skips intencionais — testes mobile-only da Evolução 007 pulam o project desktop). Contagem confirmada por `npx playwright test --list` em 2026-10-27. Execução da DEC-006.
+- **Playwright mínimo:** ✅ **VERIFIED** — `@playwright/test` 1.64.1, **Chromium** somente; projects desktop **1280×720** e mobile **375×667**; **17 smoke tests / 34 execuções** (32 passed + 2 skips intencionais — testes mobile-only da Evolução 007 pulam o project desktop). Contagem após a Entrega C (2026-10-28): 2 testes ajustados (navegação por âncoras + links da home) + 2 novos (seis áreas/hierarquia + Sobre textual). Execução da DEC-006.
 - **QLT-001:** ✅ VERIFIED. **QLT-006:** ✅ VERIFIED (Evolução 007). **QLT-007:** ✅ VERIFIED (Evolução 006). **QLT-012:** ✅ VERIFIED.
 - **`/library`:** READY.
 - **Design System:** READY.
