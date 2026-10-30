@@ -37,16 +37,17 @@ public/
 
 ## `app/`
 
-- `app/layout.tsx` — layout raiz (metadata, `lang="pt-br"`, dark por padrão via classe `dark`).
+- `app/layout.tsx` — layout raiz (metadata institucional + `robots` noindex/nofollow **temporário** — ver Política de indexação; `lang="pt-br"`; tema claro como padrão).
 - `app/globals.css` — import do Tailwind + `tw-animate-css`, `@theme inline`, tokens light/dark.
 - `app/page.tsx` — página inicial.
 - `app/(site)/` — **route group** de rotas do site (parênteses = sem segmento de URL):
   - `layout.tsx` — layout do site: `HeaderBasic` consumindo `siteBrand`/`siteNavLinks` de `lib/site-config.ts`, main e rodapé mínimo institucional (sem contatos/OAB inventados; `FooterCta` não é mais renderizado aqui).
   - `page.tsx` — home institucional: `HeroPrimary` consumindo `siteHero` de `lib/site-config.ts` (composição mínima da Entrega B; demais seções em entregas futuras).
+  - `blog/layout.tsx` — **criado na F3-A**: metadata `robots` noindex/nofollow para o segmento real do blog (route group `(site)` — não existe `app/blog/`).
   - `blog/page.tsx` — listagem de posts.
   - `blog/[slug]/page.tsx` — rota dinâmica de post (hoje vazia — ver problema conhecido).
 - `app/library/` — showcase oficial (ver DEC-001):
-  - `layout.tsx` — wrapper com `SectionsShell`.
+  - `layout.tsx` — wrapper com `SectionsShell` + metadata `robots` noindex/nofollow (F3-A).
   - `page.tsx` — índice/redirect.
   - `[categoria]/page.tsx` — uma página por grupo (headers, footers, hero, about, services, testimonials, pricing, contact, cta).
 
@@ -95,6 +96,43 @@ lib/site-config.ts
 - Layouts aninhados (`app/(site)/layout.tsx`, `app/library/layout.tsx`).
 - Rutas dinâmicas (`[slug]`) para conteúdo variável.
 
+## Política de indexação (F3-A — temporária)
+
+A política atual é de **pré-publicação**: as rotas afetadas emitem `noindex, nofollow` via metadata Next.js (merge por segmento — nenhuma página define `robots` próprio, todas herdam do layout do seu segmento).
+
+### Metadata global — `app/layout.tsx`
+
+- `robots: { index: false, follow: false }` na metadata existente do layout raiz — **TEMPORÁRIO**.
+- Motivo: a Home ainda possui conteúdo pendente de aprovação profissional e não está autorizada para lançamento definitivo.
+
+### Blog — `app/(site)/blog/layout.tsx` (criado na F3-A)
+
+- O blog vive no **route group `(site)`** — o segmento real é `app/(site)/blog/`; um layout em `app/blog/` não existiria na cadeia de rotas e seria inerte.
+- Metadata `noindex, nofollow` herda por `/blog` e por `/blog/[slug]` (artigos dinâmicos protegidos pelo layout; `blog/page.tsx` e `blog/[slug]/page.tsx` não definem metadata própria).
+- Artigos demonstrativos preservados; nenhuma rota removida; o layout apenas repassa `children` (sem mudança visual).
+
+### Library — `app/library/layout.tsx`
+
+- Metadata `noindex, nofollow` exportada no layout — herda por `/library` (redirect) e por todas as categorias filhas; as páginas com metadata própria (headers, footers, logos, stats, faq) definem apenas título/descrição e **não** sobrescrevem `robots`.
+- Biblioteca continua acessível diretamente por URL; showcases preservados; nenhuma autenticação adicionada; nenhum componente removido.
+
+### Limitações do noindex
+
+- `noindex` **não é autenticação** nem controle de acesso: não bloqueia acesso por URL e não protege informações confidenciais.
+- Não impede necessariamente a indexação por mecanismos que ignorem a diretiva.
+- Não corrige formulários demonstrativos sem backend (`ContactSimple`/`ContactSplit`).
+- Não substitui a revisão de conteúdo antes da publicação.
+
+### Robots e sitemap
+
+- Nenhum `robots.ts` foi criado na F3-A; nenhum sitemap foi criado; nenhum domínio é presumido (sem `metadataBase`).
+- A eventual política de `robots.txt` (F3-B) deverá ser planejada sem impedir que os crawlers consigam ler o `noindex` das páginas demonstrativas.
+
+### Gate obrigatório de go-live
+
+- A liberação pública da Home deverá remover o `noindex` global **somente** após aprovação do conteúdo e das informações profissionais pela advogada.
+- As regras específicas de blog e library deverão permanecer enquanto essas rotas contiverem demonstrações.
+
 ## Componentes / sections
 
 - Seções como blocos reutilizáveis que compõem páginas.
@@ -111,7 +149,7 @@ lib/site-config.ts
 
 - **Playwright** (`@playwright/test` 1.64.1, devDependency) — infraestrutura e2e/smoke mínima (DEC-006, implementada 2026-10-14).
 - `playwright.config.ts` — `testDir: ./tests`, `baseURL: http://localhost:3000`, `webServer` iniciando `npm run dev`.
-- `tests/smoke.spec.ts` — **15 smoke tests**: `/`, `/blog` (listagem, post válido, slug inexistente/404), `/library` (redirect, headers, footers), navegação home → blog, home institucional (Entrega B), mobile nav, review cards/Avatar e hero data-driven. Contagem confirmada: 15 casos × 2 projetos = 30 execuções.
+- `tests/smoke.spec.ts` — **23 smoke tests**: `/`, `/blog` (listagem, post válido, slug inexistente/404), `/library` (redirect, headers, footers), navegação home → blog, home institucional (Entregas B–C), mobile nav, review cards/Avatar, hero data-driven, ContactDetails (Entrega D), FAQ (Entrega E) e política de indexação (F3-A — home noindex + rotas demonstrativas noindex). Contagem confirmada: 23 casos × 2 projetos = 46 execuções (44 passed + 2 skipped).
 - **Projects:** desktop (1280×720) e mobile (375×667), **Chromium** somente.
 - **Execução:** `npm run test:e2e`.
 - Visual regression: ainda não configurada (posterior).

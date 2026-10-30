@@ -21,6 +21,12 @@ export const metadata: Metadata = {
   title: "Maria Gabriella | Advocacia Personalizada",
   description:
     "Informações sobre a atuação profissional e os serviços jurídicos apresentados por Maria Gabriella — Advocacia Personalizada.",
+  // Política temporária de pré-publicação: conteúdo da home ainda pendente de
+  // aprovação da cliente. A liberação da indexação é etapa obrigatória do go-live.
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default function RootLayout({

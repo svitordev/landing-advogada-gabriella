@@ -141,3 +141,15 @@ Registro:
 - Checklist final da `docs/DEFINITION-OF-DONE.md`, incluindo LGPD e critérios específicos da landing.
 - **Aprovação formal da advogada** de todo o conteúdo (jurídico e publicitário) antes de publicar.
 - Nenhum dado `PENDENTE_CONFIRMACAO_CLIENTE` pode permanecer no ar.
+
+### Entrega F3-A — Política de Indexação Pré-Publicação — TECHNICALLY VERIFIED (2026-10-30)
+
+- **Home:** `noindex, nofollow` **temporário** via metadata do layout raiz — permanece assim até aprovação do conteúdo pela cliente; a liberação da indexação é gate obrigatório do go-live.
+- **Blog:** política específica no layout real do segmento — `app/(site)/blog/layout.tsx` (route group `(site)`), herdada por `/blog` e `/blog/[slug]`; artigos demonstrativos preservados.
+- **Library:** política específica no layout (`noindex, nofollow`), herdada por todas as categorias; rotas continuam acessíveis diretamente (noindex ≠ controle de acesso).
+- Nenhuma rota removida; nenhum componente alterado; nenhuma dependência adicionada; nenhuma alteração visual.
+- Duas verificações Playwright novas (home permanece noindex; rotas demonstrativas blog/library permanecem acessíveis e noindex).
+- Validação em desenvolvimento (Playwright) **e em produção** (`next build` + `next start`): meta robots verificada via HTTP em `/`, `/blog`, `/blog/por-que-sua-empresa-precisa-de-um-site-hoje`, `/library/headers` e `/library/contact` (amostra).
+- Gates: lint 0/0 · build PASS (17 rotas) · Playwright 44 passed + 2 skipped (23 casos × 2 projetos) · `git diff --check` limpo.
+- **F3-A não conclui o isolamento das demonstrações.**
+- Pendências futuras: **F3-B** (SEO técnico definitivo — robots/sitemap/`metadataBase`, condicionado ao domínio), **F3-C** (revisão e possível isolamento de rotas demonstrativas), liberação deliberada de indexação no go-live e aprovação dos materiais e conteúdos pela cliente (fase 2). O site **não** está pronto para publicação.

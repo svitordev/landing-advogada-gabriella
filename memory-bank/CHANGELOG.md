@@ -4,6 +4,20 @@ Registro de mudanças importantes ao longo da evolução. Formato inspirado em K
 
 ---
 
+## [2026-10-30] — Entrega F3-A: Política de Indexação Pré-Publicação (TECHNICALLY VERIFIED)
+
+- **Metadata global temporária** no root layout (`app/layout.tsx`): `robots: { index: false, follow: false }` — a Home permanece `noindex` até aprovação do conteúdo pela cliente; a liberação da indexação é gate obrigatório do go-live.
+- **Novo `app/(site)/blog/layout.tsx`** — criado no segmento real do blog (route group `(site)`; `app/blog/` não existe na cadeia de rotas): `noindex, nofollow` herdado por `/blog` e pela rota dinâmica `[slug]`; artigos demonstrativos preservados; nenhuma rota removida.
+- **`app/library/layout.tsx`** passou a exportar metadata `noindex, nofollow`, herdada por `/library` (redirect) e por todas as categorias filhas (nenhuma página sobrescreve `robots`).
+- Sem alterações visuais; nenhum componente novo (contagem preservada em 42); nenhuma dependência nova; `noindex` é mitigação de indexação, não controle de acesso — todas as rotas seguem acessíveis diretamente por URL.
+- Duas verificações Playwright novas: home permanece `noindex` (H1 institucional preservado) e rotas demonstrativas (blog + artigos + library) permanecem acessíveis e `noindex`.
+- Build de produção validado (`next build` + `next start`): `<meta name="robots" content="noindex, nofollow"/>` confirmada via HTTP em `/`, `/blog`, `/blog/por-que-sua-empresa-precisa-de-um-site-hoje`, `/library/headers` e `/library/contact` (amostra — `/library/faq` coberta apenas em desenvolvimento).
+- Nenhum `robots.ts`/sitemap criado na F3-A (nenhum domínio presumido); F3-B (SEO técnico definitivo) e F3-C (revisão/possível isolamento das demonstrações) pendentes.
+- Gates: lint **0/0** · build **PASS** (17 rotas) · Playwright **44 passed + 2 skipped** (23 casos × 2 projetos) · `git diff --check` limpo.
+- Documentação atualizada: `docs/ARQUITETURA.md`, `docs/ROADMAP-LANDING.md`, `memory-bank/CURRENT-STATE.md`, `memory-bank/CHANGELOG.md`.
+
+---
+
 ## [2026-10-30] — Entrega F2-A: Refinamento Tipográfico e UX do Header (TECHNICALLY VERIFIED)
 
 - `HeaderBasic` — único arquivo funcional alterado (somente classes): marca `text-sm`→`text-base`; navegação desktop `text-xs`→`text-sm`; padding vertical dos links `py-1`→`py-1.5` (alvos medidos ≈32px de altura).

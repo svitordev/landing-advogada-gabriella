@@ -343,3 +343,38 @@ test('home nao publica FAQ e preserva navegacao e secoes existentes', async ({ p
   await expect(page.locator('#areas-de-atuacao').getByRole('heading', { level: 2, name: 'Áreas de atuação' })).toBeVisible();
   await expect(page.locator('#sobre').getByRole('heading', { level: 2, name: 'Sobre a advogada' })).toBeVisible();
 });
+
+test('home permanece noindex ate aprovacao de conteudo (pre-publicacao)', async ({ page }) => {
+  await page.goto('/');
+
+  // Conteudo institucional preservado (a home nao foi removida).
+  await expect(page.getByRole('heading', { level: 1, name: 'Advocacia personalizada, com atenção a cada detalhe.' })).toBeVisible();
+
+  // Politica temporaria de pre-publicacao: noindex + nofollow via metadata do layout raiz.
+  const robots = page.locator('head meta[name="robots"]');
+  await expect(robots).toHaveCount(1);
+  await expect(robots).toHaveAttribute('content', /noindex/i);
+  await expect(robots).toHaveAttribute('content', /nofollow/i);
+});
+
+test('rotas demonstrativas (blog e library) permanecem acessiveis e noindex', async ({ page }) => {
+  const routes = [
+    '/blog',
+    '/blog/por-que-sua-empresa-precisa-de-um-site-hoje',
+    '/library/headers',
+    '/library/contact',
+    '/library/faq',
+  ];
+
+  for (const route of routes) {
+    await page.goto(route);
+    const robots = page.locator('head meta[name="robots"]');
+    await expect(robots, `robots meta ausente em ${route}`).toHaveCount(1);
+    await expect(robots, `noindex ausente em ${route}`).toHaveAttribute('content', /noindex/i);
+    await expect(robots, `nofollow ausente em ${route}`).toHaveAttribute('content', /nofollow/i);
+  }
+
+  // Blog nao foi removido — conteudo demonstrativo continua renderizando.
+  await page.goto('/blog');
+  await expect(page.getByRole('heading', { level: 1, name: 'Blog' })).toBeVisible();
+});
