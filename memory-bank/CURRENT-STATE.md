@@ -6,10 +6,11 @@ Snapshot curto do estado atual do repositório. Não copiar toda a documentaçã
 
 Projeto **independente** (landing page institucional da advogada Maria Gabriella), criado a partir do código do Svitordev UI Lab.
 
-- **Fase atual:** bootstrap documental concluído + Design Foundation VERIFIED + Entrega B VERIFIED + Entrega C VERIFIED + **Entrega D (ContactDetails data-driven) funcionalmente VERIFIED** (2026-10-28). Landing ainda em composição — contato público ainda não publicado.
+- **Fase atual:** bootstrap documental concluído + Design Foundation VERIFIED + Entrega B VERIFIED + Entrega C VERIFIED + Entrega D VERIFIED + **Entrega E (FAQ reutilizável) funcionalmente VERIFIED** (2026-10-29). Landing ainda em composição — contato público e FAQ institucional ainda não publicados.
 - **Home atual:** Header institucional → Hero → Áreas de atuação (6 cards) → Sobre → footer mínimo — tudo data-driven via `lib/site-config.ts` (PROJECT_ONLY — configuração, não componente React).
 - **Home ainda sem Atendimento/Contato publicado** — nenhum CTA de contato ativo; nenhum telefone/e-mail/WhatsApp da cliente inventado. Navegação pública permanece Início · Áreas de atuação · Sobre.
 - **`ContactDetails` agora é data-driven e reutilizável** (`LAB_CANDIDATE`), com demonstração na `/library/contact` (dados fictícios). Contato institucional pendente de dados oficiais.
+- **`FaqSection` criado** (`LAB_CANDIDATE`) — `details`/`summary` nativos, Server Component, sem dependência nova, com demonstração na `/library/faq` (dados fictícios). A FAQ institucional da advogada **não foi publicada** — perguntas e respostas dependem de aprovação da profissional.
 - **Seis áreas de atuação preliminares** com copy descritiva provisória; **Sobre a advogada** com copy institucional provisória — ambos `PENDENTE_CONFIRMACAO_CLIENTE` (marcação só no código, nunca na interface).
 - **Navegação pública por âncoras reais:** Início `/` · Áreas de atuação `/#areas-de-atuacao` · Sobre `/#sobre`; active state não destaca links com hash (ajuste mínimo no `header-basic`); `MobileNav` intacto; sem scroll spy.
 - **"Conteúdo" saiu da navegação pública.** A rota `/blog` continua existindo com artigos genéricos herdados do template — pendência antes do deploy (substituir ou despublicar).
@@ -22,9 +23,9 @@ Projeto **independente** (landing page institucional da advogada Maria Gabriella
 - **Dados profissionais pendentes de confirmação:** contatos oficiais (e-mail/telefone/WhatsApp), região atendida, inscrição OAB, logotipo/monograma, fotografia profissional, revisão dos textos.
 - **Publicação:** condicionada à avaliação e aprovação jurídica/publicitária pela advogada antes do ar.
 - **Site ainda não pronto para publicação.**
-- **Roadmap ativo:** `docs/ROADMAP-LANDING.md` (fases 1 e 4 ✅; fase 5 parcialmente executada — Entregas B, C e D VERIFIED; fases 2/3 seguem pendentes). O roadmap das 1000 evoluções é histórico (origem UI Lab).
-- **Gates da Entrega D:** lint 0/0 · build PASS (16 rotas) · Playwright 36 passed + 2 skipped (19 casos × 2 projetos) · verificação visual em 375×667 (1 coluna), 768×1024 (2 colunas) e 1280×720 (3 colunas) em `/library/contact` — zero overflow; foco visível por teclado confirmado; home intacta.
-- **Próximo passo:** FAQ / conteúdo informativo mediante planejamento específico (não iniciada). Contato institucional depende dos dados oficiais (fase 2).
+- **Roadmap ativo:** `docs/ROADMAP-LANDING.md` (fases 1 e 4 ✅; fase 5 parcialmente executada — Entregas B, C, D e E VERIFIED; fases 2/3 seguem pendentes). O roadmap das 1000 evoluções é histórico (origem UI Lab).
+- **Gates da Entrega E:** lint 0/0 · build PASS (17 rotas) · Playwright 40 passed + 2 skipped (21 casos × 2 projetos) · verificação visual em 375×667, 768×1024 e 1280×720 em `/library/faq` — uma coluna, zero overflow; foco visível por teclado e reduced-motion confirmados; home intacta.
+- **Próximo passo:** publicação da FAQ institucional quando houver perguntas e respostas aprovadas pela profissional (conteúdo — fase 2). Contato institucional depende dos dados oficiais.
 
 ### Estado herdado do UI Lab (histórico — descreve o código, ainda válido como estado técnico)
 
@@ -71,9 +72,9 @@ public/
 
 - **6** UI components (`components/ui/` — + `badge` via Evolução 004, + `avatar` via Evolução 008)
 - **7** site components (`components/site/` — headers + footers; + `mobile-nav` via Evolução 007)
-- **26** section components (`components/sections/` — 7 grupos × 3 + `cta-split-actions` + `logos-strip` + `hero-media-showcase` + `stats-grid` + `testimonials-rating-cards`)
+- **27** section components (`components/sections/` — 7 grupos × 3 + `cta-split-actions` + `logos-strip` + `hero-media-showcase` + `stats-grid` + `testimonials-rating-cards` + `faq-section` via Entrega E)
 - **2** wrappers/shells (`library-shell.tsx` + `app/library/layout.tsx`)
-- **Total: 41** componentes reutilizáveis relevantes
+- **Total: 42** componentes reutilizáveis relevantes
 
 ## `/library` (DEC-001)
 
@@ -83,7 +84,7 @@ Showcase oficial. Estrutura `app/library/[categoria]/page.tsx` renderiza cada va
 
 Production build **verde** (PASS). Lint atual: **0 errors / 0 warnings**. Rota `/blog/[slug]` funcional.
 
-- **Playwright mínimo:** ✅ **VERIFIED** — `@playwright/test` 1.64.1, **Chromium** somente; projects desktop **1280×720** e mobile **375×667**; **19 smoke tests / 38 execuções** (36 passed + 2 skips intencionais — testes mobile-only da Evolução 007 pulam o project desktop). Contagem após a Entrega C: 2 testes ajustados (navegação por âncoras + links da home) + 2 novos (seis áreas/hierarquia + Sobre textual); após a Entrega D: +2 novos (ContactDetails na library com/sem link, sem formulário; home sem seção de contato com navegação preservada). Execução da DEC-006.
+- **Playwright mínimo:** ✅ **VERIFIED** — `@playwright/test` 1.64.1, **Chromium** somente; projects desktop **1280×720** e mobile **375×667**; **21 smoke tests / 42 execuções** (40 passed + 2 skips intencionais — testes mobile-only da Evolução 007 pulam o project desktop). Contagem após a Entrega C: 2 testes ajustados (navegação por âncoras + links da home) + 2 novos (seis áreas/hierarquia + Sobre textual); após a Entrega D: +2 novos (ContactDetails na library com/sem link, sem formulário; home sem seção de contato com navegação preservada); após a Entrega E: +2 novos (FAQ na library com teclado/sem controles duplicados; home sem FAQ com navegação preservada). Execução da DEC-006.
 - **QLT-001:** ✅ VERIFIED. **QLT-006:** ✅ VERIFIED (Evolução 007). **QLT-007:** ✅ VERIFIED (Evolução 006). **QLT-012:** ✅ VERIFIED.
 - **`/library`:** READY.
 - **Design System:** READY.

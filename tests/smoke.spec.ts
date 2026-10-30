@@ -281,3 +281,65 @@ test('home nao renderiza secao de contato e preserva navegacao real', async ({ p
   await expect(banner.getByRole('link', { name: 'Áreas de atuação' })).toHaveAttribute('href', '/#areas-de-atuacao');
   await expect(banner.getByRole('link', { name: 'Sobre' })).toHaveAttribute('href', '/#sobre');
 });
+
+test('faq da library abre e fecha itens por teclado sem controles duplicados', async ({ page }) => {
+  await page.goto('/library/faq');
+
+  const faq = page
+    .locator('section')
+    .filter({ has: page.getByRole('heading', { level: 2, name: 'Perguntas frequentes' }) });
+
+  await expect(faq.getByRole('heading', { level: 2, name: 'Perguntas frequentes' })).toBeVisible();
+
+  const items = faq.locator('details');
+  await expect(items).toHaveCount(3);
+
+  const first = items.first();
+  const firstSummary = first.locator('summary');
+  const firstAnswer = first.getByText('Você envia sua mensagem pelos canais de atendimento');
+
+  // Estado inicial: fechado, resposta nao visivel.
+  await expect(first).not.toHaveAttribute('open');
+  await expect(firstAnswer).toBeHidden();
+
+  // Teclado: Enter abre, Enter fecha, Space reabre.
+  await firstSummary.focus();
+  await page.keyboard.press('Enter');
+  await expect(first).toHaveAttribute('open');
+  await expect(firstAnswer).toBeVisible();
+
+  await page.keyboard.press('Enter');
+  await expect(first).not.toHaveAttribute('open');
+  await expect(firstAnswer).toBeHidden();
+
+  await page.keyboard.press('Space');
+  await expect(first).toHaveAttribute('open');
+  await expect(firstAnswer).toBeVisible();
+
+  // O controle e o proprio summary nativo — o nome acessivel da pergunta vem do seu conteudo
+  // (arvore de a11y do Chromium: disclosure com nome, nao um botao). Sem botoes artificiais.
+  await expect(faq.locator('summary').filter({ hasText: 'Como funciona o primeiro contato?' })).toBeVisible();
+  await expect(faq.locator('button')).toHaveCount(0);
+});
+
+test('home nao publica FAQ e preserva navegacao e secoes existentes', async ({ page }, testInfo) => {
+  await page.goto('/');
+
+  // Conteudo institucional de FAQ ainda sem aprovacao da profissional — nada publicado na home.
+  await expect(page.locator('#faq')).toHaveCount(0);
+  await expect(page.locator('a[href="/#faq"]')).toHaveCount(0);
+
+  const banner = page.getByRole('banner');
+  if (testInfo.project.name === 'mobile') {
+    await banner.getByRole('button', { name: 'Abrir menu' }).click();
+  }
+
+  await expect(banner.getByRole('link', { name: 'Início' })).toHaveAttribute('href', '/');
+  await expect(banner.getByRole('link', { name: 'Áreas de atuação' })).toHaveAttribute('href', '/#areas-de-atuacao');
+  await expect(banner.getByRole('link', { name: 'Sobre' })).toHaveAttribute('href', '/#sobre');
+
+  // Secoes existentes da home preservadas.
+  await expect(page.getByRole('heading', { level: 1 })).toHaveCount(1);
+  await expect(page.locator('#areas-de-atuacao').getByRole('heading', { level: 2, name: 'Áreas de atuação' })).toBeVisible();
+  await expect(page.locator('#sobre').getByRole('heading', { level: 2, name: 'Sobre a advogada' })).toBeVisible();
+});

@@ -4,6 +4,22 @@ Registro de mudanças importantes ao longo da evolução. Formato inspirado em K
 
 ---
 
+## [2026-10-29] — Entrega E: FAQ Reutilizável (VERIFIED)
+
+- Criado `components/sections/faq/faq-section.tsx` — `FaqSection`, Server Component, data-driven, seguindo o contrato de props já documentado; nenhum conteúdo da cliente hardcoded.
+- Contrato: `FaqItem`/`FaqSectionProps` (tipos locais); `title` obrigatório; `id?`/`eyebrow?`/`description?` opcionais; `items` via array — `items=[]` → a seção não é renderizada.
+- `details`/`summary` nativos — sem primitive Accordion criado, sem estado React, sem `"use client"`, sem dependência nova; pergunta com hierarquia visual de título diretamente no `summary` (previsibilidade semântica); resposta fora do `summary`; múltiplos itens podem ficar abertos independentemente.
+- Acessibilidade: teclado (Enter/Space), foco visível, `ChevronDown` decorativo `aria-hidden` com rotação no estado aberto — transição apenas `motion-safe` (reduced motion = rotação instantânea); nenhum ARIA desnecessário.
+- Criada `app/library/faq/page.tsx` (showcase com demo tipada de serviço fictício) e adicionado o link "FAQ" ao `library-shell` — demais categorias intocadas.
+- Home preservada: nenhuma FAQ publicada (conteúdo jurídico depende de aprovação da profissional); navegação e seções existentes intactas.
+- Testes: 2 novos Playwright (FAQ na library com teclado/sem controles duplicados; home sem FAQ com navegação preservada). Suíte: 21 casos × 2 projetos = 42 execuções — **40 passed + 2 skipped**.
+- Responsividade: uma coluna em 375×667, 768×1024 e 1280×720 — zero overflow.
+- Gates: lint **0/0** · build **PASS** (17 rotas) · `git diff --check` limpo.
+- **Nenhuma dependência nova; nenhum primitive criado** (componente novo único; contagem do catálogo de 41 para 42). Classificação: `FaqSection` → `LAB_CANDIDATE`; dados jurídicos futuros → `PROJECT_ONLY`.
+- Documentação atualizada: `docs/COMPONENT-CATALOG.md`, `docs/ROADMAP-LANDING.md`, `memory-bank/CURRENT-STATE.md`, `memory-bank/CHANGELOG.md`.
+
+---
+
 ## [2026-10-28] — Entrega D: ContactDetails Data-Driven (VERIFIED)
 
 - `ContactDetails` migrado para contrato data-driven (`ContactChannel`/`ContactDetailsProps` — tipos locais; `title` obrigatório; `id?`/`eyebrow?`/`description?`/`channels?` opcionais); Server Component; nenhum conteúdo da cliente hardcoded.

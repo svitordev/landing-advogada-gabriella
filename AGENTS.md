@@ -17,7 +17,7 @@ app/              # Next.js App Router (páginas + layouts) — conteúdo herdad
 components/
   ui/             # 6 componentes base shadcn/ui
   site/           # 7 componentes (headers + footers)
-  sections/       # 26 seções + shell da /library
+  sections/       # 27 seções + shell da /library
 lib/              # utils (cn) + fonte de dados do blog
 public/           # assets (apenas SVGs padrão do template)
 docs/             # documentação
@@ -25,7 +25,7 @@ memory-bank/      # memória do projeto
 tests/            # smoke tests Playwright
 ```
 
-Inventário real completo em `docs/COMPONENT-CATALOG.md` (41 componentes relevantes). O código herdado ainda não foi personalizado para a cliente.
+Inventário real completo em `docs/COMPONENT-CATALOG.md` (42 componentes relevantes). O código herdado ainda não foi personalizado para a cliente.
 
 Estrutura oficial é `app/`, `components/`, `lib/`, `public/`. **`src/` não será introduzido.** Categorias novas (`layouts/`, `patterns/`, `compositions/`) só quando houver necessidade real.
 

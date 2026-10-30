@@ -6,9 +6,9 @@
 
 - **6** UI components
 - **7** site components
-- **26** section components
+- **27** section components
 - **2** wrappers/shells
-- **Total: 41** componentes reutilizáveis relevantes
+- **Total: 42** componentes reutilizáveis relevantes
 
 > `lib/site-config.ts` é configuração do projeto (PROJECT_ONLY), não componente React — não entra na contagem.
 
@@ -44,7 +44,7 @@
 | FooterCta | `components/site/footers/footer-cta.tsx` | Footer | Template | Média | CTA com botão |
 | FooterSimple | `components/site/footers/footer-simple.tsx` | Footer | Template | Média | Minimalista |
 
-## Section components — `components/sections/` (26)
+## Section components — `components/sections/` (27)
 
 ### Hero — `components/sections/hero/` (4)
 
@@ -117,6 +117,12 @@
 |---|---|---|---|
 | StatsGrid | `components/sections/stats/stats-grid.tsx` | Pronto | **Data-driven** (Evolução 005). Grid de números de destaque (`value` + `label` + `description` opcional) com badge de contexto via `Badge` (004); Server Component; `ul[role=list]` 2 colunas no mobile / 4 no desktop; sem motion; demo na `/library/stats` |
 
+### FAQ — `components/sections/faq/` (1)
+
+| Nome | Path | Status | Observações |
+|---|---|---|---|
+| FaqSection | `components/sections/faq/faq-section.tsx` | Pronto — data-driven | **Novo (Entrega E, 2026-10-29) — `LAB_CANDIDATE`.** Contrato `FaqItem`/`FaqSectionProps` (tipos locais): `title` obrigatório; `id?`/`eyebrow?`/`description?` opcionais; `items` via array — `items=[]` → a seção não é renderizada. `details`/`summary` nativos (sem primitive Accordion, sem estado React, sem `"use client"`); pergunta com hierarquia visual de título diretamente no `summary` (previsibilidade semântica na árvore de acessibilidade); resposta fora do `summary`; múltiplos itens podem ficar abertos independentemente; `ChevronDown` (lucide) decorativo `aria-hidden` com rotação no estado aberto — transição apenas `motion-safe` (reduced motion = rotação instantânea); foco visível; Server Component; layout de uma coluna (mobile-first); nenhum conteúdo da cliente hardcoded; showcase na `/library/faq` com dados fictícios |
+
 ## Wrappers / shells (2)
 
 | Nome | Path | Finalidade |
@@ -138,7 +144,7 @@ Mapeamento apenas indicativo, para a composição futura (ver `docs/ROADMAP-LAND
 | Sobre a advogada | `about-split` / `about-timeline` |
 | Atendimento | `contact-details` / `contact-split` |
 | Conteúdo informativo | blog herdado (conteúdo de demonstração — conteúdo da cliente pendente) |
-| FAQ | nenhum componente existe — seria criação nova (`LAB_CANDIDATE` em potencial) |
+| FAQ | `faq-section` (data-driven — perguntas e respostas da cliente pendentes de aprovação) |
 | Contato | `contact-simple` / `contact-details` |
 | Footer | `footer-columns` |
 
@@ -147,5 +153,5 @@ Mapeamento apenas indicativo, para a composição futura (ver `docs/ROADMAP-LAND
 - Componentes `ui/` são base e sem conteúdo hardcoded (prontos para reutilização direta).
 - Componentes `site/` e `sections/` são **templates** — estrutura reutilizável, mas com conteúdo hardcoded que deve ser substituído por dados do projeto.
 - **Formulários:** o formulário inerte foi removido **somente** do `ContactDetails` (Entrega D). `ContactSimple` e `ContactSplit` permanecem templates com formulários demonstrativos, ainda sem envio funcional — o problema global de formulários não está resolvido.
-- **Classificação (convenção DEC-011):** `ContactDetails` → `LAB_CANDIDATE`; dados específicos da advogada → `PROJECT_ONLY` (`lib/site-config.ts`). Nenhum componente `LAB_PROMOTED`.
+- **Classificação (convenção DEC-011):** `ContactDetails` → `LAB_CANDIDATE`; `FaqSection` → `LAB_CANDIDATE`; dados específicos da advogada → `PROJECT_ONLY` (`lib/site-config.ts`). Nenhum componente `LAB_PROMOTED`.
 - Catálogo vivo (preview visual) = `/library`.

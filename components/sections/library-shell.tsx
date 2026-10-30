@@ -15,6 +15,7 @@ const sectionLinks = [
   { href: "/library/testimonials", label: "Testimonials" },
   { href: "/library/pricing", label: "Pricings" },
   { href: "/library/contact", label: "Contacts" },
+  { href: "/library/faq", label: "FAQ" },
   { href: "/library/cta", label: "CTAs" },
   { href: "/library/footers", label: "Footers" },
 ];

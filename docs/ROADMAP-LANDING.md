@@ -74,7 +74,17 @@ Arquivos funcionais afetados: `app/globals.css`, `app/layout.tsx`.
 - Gates: lint 0/0 · build PASS (16 rotas) · Playwright 36 passed + 2 skipped (19 casos × 2 projetos) · `git diff --check` limpo.
 - IMPORTANTE: a fase de Atendimento/Contato público **não** está concluída — a entrega preparou o componente reutilizável, mas não publicou contato institucional da advogada; a região de atendimento permanece pendente de validação e os canais oficiais seguem pendentes (fase 2).
 
-**Próxima evolução sugerida: FAQ / conteúdo informativo, mediante planejamento específico (não iniciada). Contato institucional depende dos dados oficiais (fase 2).**
+### Entrega E — FAQ Reutilizável — implementação funcional VERIFIED (2026-10-29)
+
+- `FaqSection` criado (`components/sections/faq/faq-section.tsx`) — Server Component, contrato data-driven (`FaqItem`/`FaqSectionProps`; `title` obrigatório; `id?`/`eyebrow?`/`description?` opcionais; `items` via array; `items=[]` → seção não renderizada); nenhum conteúdo da cliente hardcoded.
+- HTML nativo `details`/`summary` — sem primitive Accordion adicional (um único consumidor), sem estado React, sem dependência nova; múltiplos itens podem ficar abertos independentemente.
+- Acessibilidade: operação por teclado (Enter/Space), foco visível, `ChevronDown` decorativo com rotação no estado aberto; transição apenas `motion-safe` (reduced motion = rotação instantânea).
+- Nova rota `/library/faq` (demo genérica de serviço fictício, sem conteúdo da cliente) + link "FAQ" na navegação da biblioteca; demais categorias intocadas.
+- Responsividade: uma coluna em 375×667, 768×1024 e 1280×720 — zero overflow.
+- Testes: 2 novos Playwright. Gates: lint 0/0 · build PASS (17 rotas) · Playwright 40 passed + 2 skipped (21 casos × 2 projetos) · `git diff --check` limpo.
+- IMPORTANTE: a entrega criou a **infraestrutura reutilizável**, não o conteúdo jurídico definitivo — a FAQ pública da advogada permanece **não publicada** na home; perguntas e respostas dependem de aprovação da profissional (fase 2). A fase geral de composição permanece parcialmente executada.
+
+**Próxima evolução sugerida: publicação da FAQ institucional quando houver conteúdo aprovado (fase 2). Contato institucional depende dos dados oficiais.**
 
 ## Fase 6 — Criação de componentes realmente necessários
 
