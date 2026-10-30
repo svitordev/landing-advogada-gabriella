@@ -4,6 +4,20 @@ Registro de mudanças importantes ao longo da evolução. Formato inspirado em K
 
 ---
 
+## [2026-10-30] — Entrega F2-A: Refinamento Tipográfico e UX do Header (TECHNICALLY VERIFIED)
+
+- `HeaderBasic` — único arquivo funcional alterado (somente classes): marca `text-sm`→`text-base`; navegação desktop `text-xs`→`text-sm`; padding vertical dos links `py-1`→`py-1.5` (alvos medidos ≈32px de altura).
+- Nome institucional do Header passa a usar `font-serif` (Playfair Display — mesmo tratamento tipográfico do Footer); subtítulo e navegação preservados em Inter.
+- `MobileNav` preservado (não modificado); contrato data-driven, active state, âncoras, foco e CTA opcional sem alteração de comportamento.
+- Compatibilidade de layout validada em 375×667 (marca + hamburger, zero overflow), 768×1024 (nav desktop visível, ≈64px entre marca e navegação, zero overflow), 1280×720 e 1440×900 (layout preservado, zero overflow).
+- Demonstração `/library/headers` reflete as alterações (componente compartilhado — efeito esperado); demo permanece genérica, sem dados da advogada.
+- **Nenhum componente novo** (contagem preservada em 42); **nenhuma dependência nova**; Footer intocado.
+- Gates: lint **0/0** · build **PASS** (17 rotas) · Playwright **40 passed + 2 skipped** (nenhum teste alterado) · `git diff --check` limpo.
+- **Aprovação estética humana das capturas pendente** — evidência programática não substitui aprovação visual.
+- Documentação atualizada: `docs/COMPONENT-CATALOG.md`, `docs/ROADMAP-LANDING.md`, `memory-bank/CURRENT-STATE.md`, `memory-bank/CHANGELOG.md`.
+
+---
+
 ## [2026-10-30] — Entrega F1: Refinamento Visual da Home (TECHNICALLY VERIFIED)
 
 - `HeroPrimary` (VIS-001): sem `image`, composição editorial centralizada em coluna única (largura limitada a `max-w-3xl`), sem placeholder e sem coluna visual vazia; com `image`, o split original permanece preservado no código (`next/image`, `alt` pelo contrato). Sem ações configuradas, nenhum CTA fictício é gerado.

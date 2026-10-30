@@ -36,16 +36,17 @@ export function HeaderBasic({ brand, links, action }: HeaderBasicProps) {
   return (
     <header className="border-b bg-background/80 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
-        {/* Logo / Marca — representação tipográfica (logotipo oficial pendente) */}
-        <Link href={brandHref} className="text-sm font-semibold tracking-tight">
-          <span className="font-bold">{brand.name}</span>
+        {/* Logo / Marca — representação tipográfica (logotipo oficial pendente).
+            Nome em serif (padrão tipográfico institucional — mesmo tratamento do footer); subtítulo em Inter. */}
+        <Link href={brandHref} className="text-base font-semibold tracking-tight">
+          <span className="font-serif font-bold">{brand.name}</span>
           {brand.subtitle && <span className="text-muted-foreground"> {brand.subtitle}</span>}
         </Link>
 
         {/* Navegação */}
         <nav
           aria-label="Navegação principal"
-          className="hidden items-center gap-4 text-xs font-medium text-muted-foreground md:flex"
+          className="hidden items-center gap-4 text-sm font-medium text-muted-foreground md:flex"
         >
           {links.map((item) => {
             const baseHref = item.href.split("#")[0] || "/";
@@ -59,7 +60,7 @@ export function HeaderBasic({ brand, links, action }: HeaderBasicProps) {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "rounded-full px-3 py-1 hover:bg-muted hover:text-foreground",
+                  "rounded-full px-3 py-1.5 hover:bg-muted hover:text-foreground",
                   isActive && "bg-muted text-foreground"
                 )}
               >

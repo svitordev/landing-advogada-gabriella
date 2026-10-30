@@ -6,7 +6,8 @@ Snapshot curto do estado atual do repositório. Não copiar toda a documentaçã
 
 Projeto **independente** (landing page institucional da advogada Maria Gabriella), criado a partir do código do Svitordev UI Lab.
 
-- **Fase atual:** bootstrap documental concluído + Design Foundation VERIFIED + Entrega B VERIFIED + Entrega C VERIFIED + Entrega D VERIFIED + Entrega E (FAQ reutilizável) funcionalmente VERIFIED (2026-10-29) + **Entrega F1 (Refinamento Visual da Home) tecnicamente VERIFIED** (2026-10-30). Landing ainda em composição — contato público e FAQ institucional ainda não publicados. Aprovação estética humana da F1 pendente.
+- **Fase atual:** bootstrap documental concluído + Design Foundation VERIFIED + Entregas B–E VERIFIED + Entrega F1 (Refinamento Visual da Home) tecnicamente VERIFIED + **Entrega F2-A (Refinamento Tipográfico e UX do Header) tecnicamente VERIFIED** (2026-10-30). Landing ainda em composição — contato público e FAQ institucional ainda não publicados. Aprovação estética humana (F1/F2-A) pendente. F2-B (assets/dados oficiais) pendente.
+- **Header atual:** marca Playfair Display 16px (`font-serif`/`text-base`) + subtítulo Inter; links desktop Inter 14px com alvos de ≈32px; `MobileNav` preservado; contrato data-driven e comportamento intactos.
 - **Home atual:** Header institucional → Hero editorial sem fotografia (sem placeholder) → Áreas de atuação (6 cards, grid 1/2/3) → Sobre (fundo `bg-background` diferenciado) → footer mínimo — tudo data-driven via `lib/site-config.ts` (PROJECT_ONLY — configuração, não componente React).
 - **Home ainda sem Atendimento/Contato publicado** — nenhum CTA de contato ativo; nenhum telefone/e-mail/WhatsApp da cliente inventado. Navegação pública permanece Início · Áreas de atuação · Sobre.
 - **`ContactDetails` agora é data-driven e reutilizável** (`LAB_CANDIDATE`), com demonstração na `/library/contact` (dados fictícios). Contato institucional pendente de dados oficiais.
@@ -14,18 +15,20 @@ Projeto **independente** (landing page institucional da advogada Maria Gabriella
 - **Seis áreas de atuação preliminares** com copy descritiva provisória; **Sobre a advogada** com copy institucional provisória — ambos `PENDENTE_CONFIRMACAO_CLIENTE` (marcação só no código, nunca na interface).
 - **Navegação pública por âncoras reais:** Início `/` · Áreas de atuação `/#areas-de-atuacao` · Sobre `/#sobre`; active state não destaca links com hash (ajuste mínimo no `header-basic`); `MobileNav` intacto; sem scroll spy.
 - **"Conteúdo" saiu da navegação pública.** A rota `/blog` continua existindo com artigos genéricos herdados do template — pendência antes do deploy (substituir ou despublicar).
+- **F2-B pendente dos materiais oficiais:** assets, OAB, contatos e conteúdo definitivo (fase 2). F2-A (escala/tipografia do Header) tecnicamente VERIFIED — ver gates abaixo.
 - **Sem logo oficial** (marca tipográfica) e **sem fotografia oficial** (hero renderiza a composição editorial sem placeholder; About renderiza somente texto — o suporte a imagem do `HeroPrimary`/`AboutSplit` está implementado, mas não foi validado em runtime com a fotografia real). **Sem contatos oficiais confirmados** — CTA de contato omitido.
 - **Tema claro aplicado** como padrão (classe `dark` removida do root; bloco `.dark` preservado, não adaptado; sem toggle).
 - **Identidade vinho/bege aplicada** nos tokens `:root` de `app/globals.css` (OKLCH calibrado; `--input` escurecido p/ ≈3.04:1).
 - **Fontes configuradas:** Inter (400/500/600, corpo) + Playfair Display (500/600, títulos h1–h3) via `next/font/google`, `display: swap`.
 - **Metadata institucional** aplicada no root layout.
-- **Assets oficiais:** pendentes (logotipo/monograma, fotografia — `PENDENTE_CONFIRMACAO_CLIENTE`). O fluxo de imagem do `HeroPrimary` com arquivo real não foi validado por ausência do asset.
+- **Assets oficiais:** pendentes (logotipo/monograma, fotografia, favicon e metadata visual definitiva/OG — `PENDENTE_CONFIRMACAO_CLIENTE`). O fluxo de imagem do `HeroPrimary` com arquivo real não foi validado por ausência do asset.
 - **Dados profissionais pendentes de confirmação:** contatos oficiais (e-mail/telefone/WhatsApp), região atendida, inscrição OAB, logotipo/monograma, fotografia profissional, revisão dos textos.
 - **Publicação:** condicionada à avaliação e aprovação jurídica/publicitária pela advogada antes do ar.
 - **Site ainda não pronto para publicação.**
 - **Roadmap ativo:** `docs/ROADMAP-LANDING.md` (fases 1 e 4 ✅; fase 5 parcialmente executada — Entregas B, C, D e E VERIFIED + F1 tecnicamente VERIFIED; fases 2/3 seguem pendentes). O roadmap das 1000 evoluções é histórico (origem UI Lab).
 - **Gates da Entrega E:** lint 0/0 · build PASS (17 rotas) · Playwright 40 passed + 2 skipped (21 casos × 2 projetos) · verificação visual em 375×667, 768×1024 e 1280×720 em `/library/faq` — uma coluna, zero overflow; foco visível por teclado e reduced-motion confirmados; home intacta.
 - **Gates da Entrega F1:** lint 0/0 · build PASS (17 rotas) · Playwright 40 passed + 2 skipped (nenhum teste alterado) · `git diff --check` limpo · zero overflow em 375×667, 768×1024, 1280×720 e 1440×900 em `/`, `/library/hero`, `/library/services` e `/library/about` — evidência programática em browser real; aprovação estética humana pendente.
+- **Gates da Entrega F2-A:** lint 0/0 · build PASS (17 rotas) · Playwright 40 passed + 2 skipped (nenhum teste alterado) · `git diff --check` limpo · zero overflow nos 4 viewports em `/` e `/library/headers` (768px: ≈64px entre marca e navegação, sem colisão) — evidência programática em browser real; aprovação estética humana pendente.
 - **Próximo passo:** publicação da FAQ institucional quando houver perguntas e respostas aprovadas pela profissional (conteúdo — fase 2). Contato institucional depende dos dados oficiais.
 
 ### Estado herdado do UI Lab (histórico — descreve o código, ainda válido como estado técnico)

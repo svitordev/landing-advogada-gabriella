@@ -100,6 +100,18 @@ Registro:
 - Gates: lint 0/0 · build PASS (17 rotas) · Playwright 40 passed + 2 skipped (nenhum teste alterado) · `git diff --check` limpo · zero overflow em 375×667, 768×1024, 1280×720 e 1440×900 em `/`, `/library/hero`, `/library/services` e `/library/about`.
 - A aprovação estética final das capturas permanece pendente de revisão humana — evidência programática não substitui aprovação visual.
 
+### Entrega F2-A — Refinamento Tipográfico e UX do Header — TECHNICALLY VERIFIED (2026-10-30)
+
+- **F2-001 implementado:** marca com maior destaque (`text-sm`→`text-base`); navegação desktop ampliada (`text-xs`→`text-sm`); alvos de navegação com ≈32px de altura (`py-1`→`py-1.5`).
+- **F2-002 implementado:** nome da marca em Playfair Display (`font-serif`, padrão tipográfico institucional); subtítulo e navegação permanecem Inter; Footer não foi modificado.
+- Compatibilidade de layout validada em 375×667, 768×1024, 1280×720 e 1440×900 — zero overflow; sem colisão marca↔navegação em 768px (≈64px de espaço).
+- Nenhum componente novo; nenhuma dependência nova; contrato e comportamento do `HeaderBasic` preservados; `MobileNav` intocado.
+- Home e demonstração da `/library/headers` preservadas (a demo reflete a nova escala — componente compartilhado, dados genéricos).
+- Gates: lint 0/0 · build PASS (17 rotas) · Playwright 40 passed + 2 skipped (nenhum teste alterado) · `git diff --check` limpo.
+- A aprovação estética humana das capturas permanece pendente.
+
+**F2-B (assets oficiais, OAB, contatos, favicon/OG) segue pendente dos materiais e dados da cliente — fase 2.**
+
 **Próxima evolução sugerida: publicação da FAQ institucional quando houver conteúdo aprovado (fase 2). Contato institucional depende dos dados oficiais.**
 
 ## Fase 6 — Criação de componentes realmente necessários
