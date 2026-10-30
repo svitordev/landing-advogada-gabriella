@@ -18,8 +18,10 @@ export function AboutSplit({ id, eyebrow, title, description, paragraphs, points
   // Coluna direita: imagem real > lista de pontos > nada (coluna textual única, sem placeholder).
   const hasSideColumn = Boolean(image || (points && points.length > 0));
 
+  // Fundo --background: alternância discreta com a seção de Áreas (bg-muted/30),
+  // aproveitando os tokens institucionais existentes.
   return (
-    <section id={id} className="w-full bg-muted/30">
+    <section id={id} className="w-full bg-background">
       <div className="mx-auto max-w-6xl px-4 py-12 md:py-16">
         <div className={hasSideColumn ? "grid gap-10 md:grid-cols-2 md:items-start" : "max-w-3xl space-y-4"}>
           {/* Coluna editorial */}

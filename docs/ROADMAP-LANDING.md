@@ -84,6 +84,22 @@ Arquivos funcionais afetados: `app/globals.css`, `app/layout.tsx`.
 - Testes: 2 novos Playwright. Gates: lint 0/0 · build PASS (17 rotas) · Playwright 40 passed + 2 skipped (21 casos × 2 projetos) · `git diff --check` limpo.
 - IMPORTANTE: a entrega criou a **infraestrutura reutilizável**, não o conteúdo jurídico definitivo — a FAQ pública da advogada permanece **não publicada** na home; perguntas e respostas dependem de aprovação da profissional (fase 2). A fase geral de composição permanece parcialmente executada.
 
+### Entrega F1 — Refinamento Visual da Home — validação técnica VERIFIED (2026-10-30)
+
+Findings corrigidos (evidência programática em browser real — Chromium; medições de geometria e computed styles):
+
+- **VIS-001** — `HeroPrimary`: sem `image`, composição editorial centralizada em coluna única (sem placeholder, sem coluna visual vazia, largura limitada a `max-w-3xl`); com `image`, o split original permanece disponível no código.
+- **VIS-002** — `ServicesGridSimple`: grid 1 coluna no mobile / 2 colunas a partir de `md` / 3 colunas a partir de `lg` (títulos longos sem quebra em 768px).
+- **VIS-003** — `AboutSplit`: fundo `bg-background`, criando alternância discreta com a seção de Áreas de atuação (que preserva `bg-muted/30`).
+
+Registro:
+
+- Nenhum componente novo foi criado; nenhuma dependência foi adicionada.
+- A Home preservou sua estrutura (Header → Hero → Áreas → Sobre → footer mínimo); H1 único e âncoras intactos.
+- As demos da `/library` refletiram as alterações compartilhadas dos componentes (impacto intencional).
+- Gates: lint 0/0 · build PASS (17 rotas) · Playwright 40 passed + 2 skipped (nenhum teste alterado) · `git diff --check` limpo · zero overflow em 375×667, 768×1024, 1280×720 e 1440×900 em `/`, `/library/hero`, `/library/services` e `/library/about`.
+- A aprovação estética final das capturas permanece pendente de revisão humana — evidência programática não substitui aprovação visual.
+
 **Próxima evolução sugerida: publicação da FAQ institucional quando houver conteúdo aprovado (fase 2). Contato institucional depende dos dados oficiais.**
 
 ## Fase 6 — Criação de componentes realmente necessários

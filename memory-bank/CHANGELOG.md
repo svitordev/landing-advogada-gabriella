@@ -4,6 +4,20 @@ Registro de mudanças importantes ao longo da evolução. Formato inspirado em K
 
 ---
 
+## [2026-10-30] — Entrega F1: Refinamento Visual da Home (TECHNICALLY VERIFIED)
+
+- `HeroPrimary` (VIS-001): sem `image`, composição editorial centralizada em coluna única (largura limitada a `max-w-3xl`), sem placeholder e sem coluna visual vazia; com `image`, o split original permanece preservado no código (`next/image`, `alt` pelo contrato). Sem ações configuradas, nenhum CTA fictício é gerado.
+- `ServicesGridSimple` (VIS-002): grid responsivo 1 coluna no mobile / 2 colunas a partir de `md` / 3 colunas a partir de `lg`; contrato data-driven inalterado; dados de atuação jurídica da cliente inalterados.
+- `AboutSplit` (VIS-003): fundo da seção alterado para `bg-background`, criando alternância discreta com a seção de Áreas de atuação (que preserva `bg-muted/30`); sem novas props; contrato e os três modos (imagem, pontos, somente texto) preservados.
+- Home e demos da `/library` (`/library/hero`, `/library/services`, `/library/about`) verificadas — as demos refletem o comportamento compartilhado dos componentes (impacto intencional).
+- **Nenhum componente novo** (contagem do catálogo preservada em 42); **nenhuma dependência nova**.
+- Gates: lint **0/0** · build **PASS** (17 rotas) · Playwright **40 passed + 2 skipped** (21 casos × 2 projetos, nenhum teste alterado) · `git diff --check` limpo.
+- Responsividade: zero overflow em 375×667, 768×1024, 1280×720 e 1440×900 (evidência programática em browser real — Chromium).
+- **Inspeção visual humana das capturas pendente** — a estética não está definitivamente aprovada; o caminho com imagem foi inspecionado no código, não validado em runtime (asset oficial ausente).
+- Documentação atualizada: `docs/COMPONENT-CATALOG.md`, `docs/ROADMAP-LANDING.md`, `memory-bank/CURRENT-STATE.md`, `memory-bank/CHANGELOG.md`.
+
+---
+
 ## [2026-10-29] — Entrega E: FAQ Reutilizável (VERIFIED)
 
 - Criado `components/sections/faq/faq-section.tsx` — `FaqSection`, Server Component, data-driven, seguindo o contrato de props já documentado; nenhum conteúdo da cliente hardcoded.

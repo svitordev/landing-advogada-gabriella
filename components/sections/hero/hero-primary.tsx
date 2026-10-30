@@ -27,9 +27,17 @@ function isInternalHref(href: string) {
 export function HeroPrimary({ eyebrow, title, description, actions, image }: HeroPrimaryProps) {
   return (
     <section className="w-full border-b bg-linear-to-b from-background to-muted/60">
-      <div className="mx-auto flex max-w-6xl flex-col items-center gap-10 px-4 py-16 md:flex-row md:py-24">
+      {/* Sem fotografia: composição textual editorial em coluna única centralada.
+          Com fotografia: split original (texto à esquerda, imagem à direita). */}
+      <div
+        className={
+          image
+            ? "mx-auto flex max-w-6xl flex-col items-center gap-10 px-4 py-16 md:flex-row md:py-24"
+            : "mx-auto max-w-3xl px-4 py-16 text-center md:py-24"
+        }
+      >
         {/* Coluna texto */}
-        <div className="flex-1 space-y-6">
+        <div className={image ? "flex-1 space-y-6" : "w-full space-y-6"}>
           {eyebrow && (
             <span className="inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-wide text-muted-foreground">
               {eyebrow}
@@ -61,9 +69,9 @@ export function HeroPrimary({ eyebrow, title, description, actions, image }: Her
           )}
         </div>
 
-        {/* Coluna visual — fotografia via next/image ou área neutra de espera */}
-        <div className="w-full flex-1">
-          {image ? (
+        {/* Coluna visual — somente quando existe fotografia real (next/image) */}
+        {image && (
+          <div className="w-full flex-1">
             <div className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-2xl border bg-muted">
               <Image
                 src={image.src}
@@ -73,13 +81,8 @@ export function HeroPrimary({ eyebrow, title, description, actions, image }: Her
                 className="object-cover"
               />
             </div>
-          ) : (
-            <div
-              aria-hidden="true"
-              className="mx-auto aspect-[4/5] w-full max-w-md rounded-2xl border bg-muted"
-            />
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </section>
   );
