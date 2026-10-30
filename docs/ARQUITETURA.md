@@ -133,6 +133,49 @@ A política atual é de **pré-publicação**: as rotas afetadas emitem `noindex
 - A liberação pública da Home deverá remover o `noindex` global **somente** após aprovação do conteúdo e das informações profissionais pela advogada.
 - As regras específicas de blog e library deverão permanecer enquanto essas rotas contiverem demonstrações.
 
+## Isolamento das demonstrações (F3-C)
+
+A F3-A cuida da **indexação**; a F3-C acrescenta **restrição de acesso HTTP** na produção padrão. As duas políticas são complementares.
+
+### Proxy Next.js 16 — `proxy.ts` (raiz)
+
+- Utiliza a **convenção Proxy do Next.js 16** (o build o registra como `ƒ Proxy (Middleware)`).
+- Matcher limitado a `["/library/:path*", "/blog/:path*"]` — caminhos parecidos (`/blogger`, `/library-extra`) **não** são interceptados; rotas futuras desses prefixos serão abrangidas automaticamente.
+- A Home e os demais recursos/rotas **não** passam pelo gate.
+- Nenhuma rota ou componente foi removido; nenhuma autenticação foi criada.
+
+### Comportamento fail-closed — `ENABLE_DEMO_ROUTES`
+
+Variável **server-side** (sem `NEXT_PUBLIC_`), comparada literalmente com `"true"` no código (`process.env.ENABLE_DEMO_ROUTES === "true"`):
+
+| Ambiente | Variável | Resultado |
+|---|---|---|
+| Desenvolvimento | Qualquer valor (inclusive ausente) | Demonstrações acessíveis |
+| Produção | Ausente | **Demonstrações bloqueadas** |
+| Produção | `false` | Demonstrações bloqueadas |
+| Produção | Qualquer valor diferente de `true` | Demonstrações bloqueadas |
+| Produção/preview | `true` | Demonstrações liberadas |
+
+- A ausência da flag em produção **jamais** libera as demonstrações (fail-closed).
+- A liberação explícita **não** fornece autenticação.
+- **Não** recomendar adicionar `ENABLE_DEMO_ROUTES=true` ao ambiente de produção pública — a flag é o mecanismo de previews autorizados.
+- A leitura da flag em runtime foi **validada contra `next start` real** nos três estados (ausente/false/true) sobre o mesmo build — não presumida.
+
+### Resposta de bloqueio
+
+- **HTTP 404 real**, corpo vazio — sem conteúdo demonstrativo, sem redirect para a Home, sem rewrite.
+- Headers na resposta bloqueada: `X-Robots-Tag: noindex, nofollow` e `Cache-Control: no-store` (resposta dependente de ambiente).
+- Particularidade verificada: `/library/` (barra final) recebe **redirecionamento canônico 308 do próprio framework** para `/library`, chegando em seguida ao 404 do proxy — a cadeia termina em 404 sem conteúdo demonstrativo. Portanto não se pode declarar que absolutamente nenhuma solicitação sofre redirecionamento.
+
+### Limitações do isolamento
+
+- O conteúdo demonstrativo **permanece nos artefatos do build**, apenas inacessível pelas rotas.
+- O proxy **não equivale a autenticação**.
+- Preview habilitado publicamente permanece acessível por URL.
+- RSC/prefetch têm cobertura pelo matcher, mas os cabeçalhos específicos não foram testados individualmente.
+- Cache/CDN externos devem respeitar a política de resposta (`no-store`).
+- A Home permanece sujeita à aprovação profissional antes do go-live.
+
 ## Componentes / sections
 
 - Seções como blocos reutilizáveis que compõem páginas.
@@ -147,11 +190,12 @@ A política atual é de **pré-publicação**: as rotas afetadas emitem `noindex
 
 ## Testes
 
-- **Playwright** (`@playwright/test` 1.64.1, devDependency) — infraestrutura e2e/smoke mínima (DEC-006, implementada 2026-10-14).
-- `playwright.config.ts` — `testDir: ./tests`, `baseURL: http://localhost:3000`, `webServer` iniciando `npm run dev`.
+- **Playwright** (`@playwright/test` 1.64.1, devDependency) — infraestrutura e2e/smoke mínima (DEC-006, implementada 2026-10-14). Arquitetura de dois ambientes no **mesmo** `playwright.config.ts` (F3-C):
+  - **Desenvolvimento** — `webServer` com `npm run dev` na porta 3000; projetos **desktop** (1280×720) e **mobile** (375×667) com `testIgnore` do spec de produção; executam os **23 casos originais** de `tests/smoke.spec.ts` (gate do proxy inativo em development por definição).
+  - **Produção** — `webServer` com `npm run build && npm run start -- -p 3100` na porta 3100, `reuseExistingServer: false` (servidor nunca reutilizado silenciosamente); projeto **production-gate** com `testMatch` exclusivo em `tests/production-gate.spec.ts` e `baseURL` explícita — configuração de produção **restrita** (flag ausente).
 - `tests/smoke.spec.ts` — **23 smoke tests**: `/`, `/blog` (listagem, post válido, slug inexistente/404), `/library` (redirect, headers, footers), navegação home → blog, home institucional (Entregas B–C), mobile nav, review cards/Avatar, hero data-driven, ContactDetails (Entrega D), FAQ (Entrega E) e política de indexação (F3-A — home noindex + rotas demonstrativas noindex). Contagem confirmada: 23 casos × 2 projetos = 46 execuções (44 passed + 2 skipped).
-- **Projects:** desktop (1280×720) e mobile (375×667), **Chromium** somente.
-- **Execução:** `npm run test:e2e`.
+- `tests/production-gate.spec.ts` — **2 testes de produção** (somente no projeto `production-gate`): rotas demonstrativas com HTTP 404 real + `X-Robots-Tag` + sem conteúdo demo/formulário (com `maxRedirects: 0`) e Home preservada (200 + `noindex, nofollow`).
+- **Chromium** somente em todos os projetos. **Execução:** `npm run test:e2e` — total 48 execuções (46 passed + 2 skipped).
 - Visual regression: ainda não configurada (posterior).
 
 ## Organização atual

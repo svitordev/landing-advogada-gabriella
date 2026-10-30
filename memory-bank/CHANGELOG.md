@@ -4,6 +4,20 @@ Registro de mudanças importantes ao longo da evolução. Formato inspirado em K
 
 ---
 
+## [2026-10-30] — Entrega F3-C: Isolamento das Rotas Demonstrativas (TECHNICALLY VERIFIED)
+
+- **Novo `proxy.ts`** (raiz, convenção Proxy do Next.js 16) com matcher `"/library/:path*"` e `"/blog/:path*"` — caminhos parecidos (`/blogger`, `/library-extra`) não são interceptados; rotas futuras desses prefixos serão abrangidas.
+- **Gate fail-closed** via variável server-side `ENABLE_DEMO_ROUTES` (sem `NEXT_PUBLIC_`): desenvolvimento sempre acessível; produção sem flag, com `false` ou com qualquer valor ≠ `true` = **bloqueio**; apenas `=true` libera explicitamente (preview autorizado — sem autenticação). Não recomendar a flag na produção pública.
+- **Resposta de bloqueio:** HTTP 404 direto, corpo vazio, sem redirect para a Home, sem rewrite, com `X-Robots-Tag: noindex, nofollow` e `Cache-Control: no-store`. Particularidade: `/library/` recebe 308 canônico do framework para `/library` antes do 404.
+- **Novo projeto Playwright `production-gate`** + **novo `tests/production-gate.spec.ts`** (2 testes) contra build real (`next start` na 3100, `reuseExistingServer: false`, flag ausente); `testMatch`/`testIgnore` no mesmo `playwright.config.ts`; suíte anterior de 23 casos preservada sem alterações.
+- Home e componentes preservados; nenhuma rota removida; nenhuma dependência adicionada; política F3-A intacta (as duas são complementares: F3-A = indexação, F3-C = acesso HTTP).
+- **Validação nos três estados da flag** em runtime real sobre o mesmo build: ausente → 404 nas demos; `false` → 404; `true` → páginas demonstrativas 200; Home 200 em todos.
+- Gates: lint **0/0** · build **PASS** (17 rotas + Proxy reconhecido) · Playwright **48 execuções: 46 passed + 2 skipped** · `git diff --check` limpo.
+- Riscos residuais: conteúdo demo permanece nos artefatos do build; proxy ≠ autenticação; preview público acessível por URL; cabeçalhos específicos de RSC/prefetch não testados individualmente; cache/CDN externo deve respeitar `no-store`; variável configurada erroneamente.
+- Documentação atualizada: `docs/ARQUITETURA.md`, `docs/ROADMAP-LANDING.md`, `memory-bank/CURRENT-STATE.md`, `memory-bank/CHANGELOG.md`.
+
+---
+
 ## [2026-10-30] — Entrega F3-A: Política de Indexação Pré-Publicação (TECHNICALLY VERIFIED)
 
 - **Metadata global temporária** no root layout (`app/layout.tsx`): `robots: { index: false, follow: false }` — a Home permanece `noindex` até aprovação do conteúdo pela cliente; a liberação da indexação é gate obrigatório do go-live.

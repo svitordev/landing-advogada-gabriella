@@ -151,5 +151,16 @@ Registro:
 - Duas verificações Playwright novas (home permanece noindex; rotas demonstrativas blog/library permanecem acessíveis e noindex).
 - Validação em desenvolvimento (Playwright) **e em produção** (`next build` + `next start`): meta robots verificada via HTTP em `/`, `/blog`, `/blog/por-que-sua-empresa-precisa-de-um-site-hoje`, `/library/headers` e `/library/contact` (amostra).
 - Gates: lint 0/0 · build PASS (17 rotas) · Playwright 44 passed + 2 skipped (23 casos × 2 projetos) · `git diff --check` limpo.
-- **F3-A não conclui o isolamento das demonstrações.**
-- Pendências futuras: **F3-B** (SEO técnico definitivo — robots/sitemap/`metadataBase`, condicionado ao domínio), **F3-C** (revisão e possível isolamento de rotas demonstrativas), liberação deliberada de indexação no go-live e aprovação dos materiais e conteúdos pela cliente (fase 2). O site **não** está pronto para publicação.
+- **F3-A não conclui o isolamento das demonstrações** — executada pela F3-C abaixo.
+- Pendências futuras: **F3-B** (SEO técnico definitivo — robots/sitemap/`metadataBase`, condicionado ao domínio), liberação deliberada de indexação no go-live e aprovação dos materiais e conteúdos pela cliente (fase 2). O site **não** está pronto para publicação.
+
+### Entrega F3-C — Isolamento das Rotas Demonstrativas — TECHNICALLY VERIFIED (2026-10-30)
+
+- **Proxy fail-closed** (`proxy.ts`, convenção Next 16): na produção padrão, `/library/**` e `/blog/**` respondem **HTTP 404 verdadeiro** (corpo vazio, `X-Robots-Tag: noindex, nofollow`, `Cache-Control: no-store`) — sem redirect para a Home e sem rewrite.
+- **Variável `ENABLE_DEMO_ROUTES`** (server-side, sem `NEXT_PUBLIC_`): desenvolvimento sempre acessível; produção sem flag ou com valor ≠ `true` = bloqueio; `ENABLE_DEMO_ROUTES=true` = liberação explícita para preview autorizado (sem autenticação).
+- **Configuração explícita para preview** validada em runtime nos três estados da flag sobre o mesmo build (`next start` real).
+- **Preservação total:** nenhum componente alterado, nenhuma rota removida, nenhuma dependência adicionada; Home e política F3-A intactas.
+- **Dois testes Playwright novos** em suíte de produção dedicada (projeto `production-gate` contra `next start` na porta 3100, `reuseExistingServer: false`) — suíte anterior de 23 casos preservada.
+- Gates: lint 0/0 · build PASS (17 rotas + Proxy reconhecido) · Playwright **48 execuções: 46 passed + 2 skipped** · `git diff --check` limpo.
+- Distinguir: **F3-A** = política de indexação · **F3-C** = isolamento HTTP de demonstrações · **F3-B** = SEO definitivo pendente.
+- Pendências da cliente e aprovação jurídica/publicitária permanecem — o site **não** está pronto para publicação.
